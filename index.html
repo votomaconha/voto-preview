@@ -192,20 +192,21 @@ footer p { margin: 0; font: 400 .79rem/1.6 "IBM Plex Mono", ui-monospace, monosp
 footer code { font-size: .95em; color: var(--ink); }
 
 /* Marketing hero. Source order is title / stage / lead, which is exactly the phone
-   layout (leaf sits between the headline and the standfirst). From 52rem up, grid areas
-   pull the leaf into its own right-hand column spanning both text rows. The stage has no
-   frame and takes the page background, so the leaf reads as an ambient element rather
-   than a boxed image. */
+   layout (the urna sits between the headline and the standfirst). From 52rem up, grid
+   areas pull the 3D scene into its own right-hand column spanning both text rows. The
+   stage has no frame and takes the page background, so it reads as an ambient element
+   rather than a boxed image. */
 .hero { margin: 1.75rem 0 0; display: grid; gap: 1.25rem; }
 .hero-title { margin: 0; max-width: 20ch; }
 .hero .lead { margin: 0; max-width: 46ch; color: var(--muted);
   font-size: 1.02rem; line-height: 1.62; }
 .hero .lead b { color: var(--ink); font-weight: 600; }
-.hero-stage { position: relative; width: 100%; height: clamp(200px, 62vw, 300px);
+.hero-stage { position: relative; width: 100%; height: clamp(240px, 70vw, 360px);
   overflow: hidden; background: var(--paper); }
 .hero-canvas { position: absolute; inset: 0; width: 100%; height: 100%; display: none;
   touch-action: none; cursor: grab; }
 .hero-canvas:active { cursor: grabbing; }
+.hero-canvas:focus-visible { outline: 2px solid var(--accent); outline-offset: -2px; }
 .hero-stage[data-webgl="on"] .hero-canvas { display: block; }
 .hero-stage[data-webgl="on"] .hero-logo { display: none; }
 .hero-logo { position: absolute; inset: 0; margin: auto; height: 74%; width: auto; display: block; }
@@ -214,13 +215,13 @@ footer code { font-size: .95em; color: var(--ink); }
 .hero-logo .frame { fill: var(--ink); }
 .hero-logo .lens { fill: var(--accent-deep); opacity: .5; }
 @media (min-width: 52rem) {
-  .hero { grid-template-columns: minmax(0, 27rem) minmax(0, 1fr);
+  .hero { grid-template-columns: minmax(0, 26rem) minmax(0, 1fr);
     grid-template-areas: "title stage" "lead stage";
     align-content: center; column-gap: 3rem; row-gap: 1.15rem;
     margin: 2.75rem 0 .5rem; }
   .hero-title { grid-area: title; font-size: clamp(2.1rem, 1.3rem + 2.6vw, 3rem); }
   .hero .lead { grid-area: lead; }
-  .hero-stage { grid-area: stage; align-self: stretch; height: 100%; min-height: 260px; }
+  .hero-stage { grid-area: stage; align-self: stretch; height: 100%; min-height: 340px; }
 }
 @media (max-width: 32rem) {
   .hero { gap: 1rem; margin-top: 1.25rem; }
@@ -361,8 +362,9 @@ body::after {
 <div class="page">
 <header class="site"><div class="topline"><p class="mark-word">VOTO<span>·</span>prévia técnica</p><div class="theme" role="group" aria-label="Tema"><button data-t="auto" class="on">Auto</button><button data-t="light">Claro</button><button data-t="dark">Escuro</button></div></div>
 <div class="hero"><h1 class="hero-title">Onde as candidaturas de 2026 se posicionam sobre legalização da maconha</h1>
-<div class="hero-stage" role="img" aria-label="Folha de cannabis de sete pontas com óculos escuros">
-  <canvas class="hero-canvas" aria-hidden="true"></canvas>
+<div class="hero-stage">
+  <canvas class="hero-canvas" tabindex="0" role="img"
+    aria-label="Urna eletrônica brasileira em três dimensões. No vão onde ficaria a foto da candidatura, uma folha de cannabis de sete pontas com óculos escuros gira em três dimensões. Arraste para girar; com o foco no quadro, digite de 0 a 9."></canvas>
   <svg class="hero-logo" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
     <defs>
       <path id="hero-blade" d="M0,0 C3,-8 9,-18 8,-30 L12,-33 9,-40 C10,-52 7,-64 8,-72 L11,-75 7,-82 C8,-90 4,-96 0,-102 C-4,-96 -8,-90 -7,-82 L-11,-75 -7,-72 C-7,-64 -10,-52 -9,-40 L-12,-33 -8,-30 C-9,-18 -3,-8 0,0 Z"/>
@@ -390,7 +392,7 @@ body::after {
   </svg>
 </div>
 <p class="lead"><b>Prévia técnica — não é uma peça publicada.</b> As posições foram extraídas de discursos e votações e classificadas por IA (extração local, adjudicação por sabia-4), <b>sem revisão humana</b> e sem o conjunto de ouro e o limiar de confiança que a publicação exige. Não é material de campanha e não permite comparação entre candidaturas. A barra ao lado de cada nome resume apenas as posições encontradas — abra a candidatura para ver o trecho literal, verificado byte a byte, que sustenta cada uma. A ausência de um nome significa que nada publicável foi encontrado, nunca que a pessoa não tem posição.</p></div>
-<div class="disclaimer"><p><a href="#metodologia">Ver a metodologia completa.</a></p></div>
+
 </header>
 <aside class="rail">
 <dl class="ledger"><div><dt>280</dt><dd>posições</dd></div><div><dt>190</dt><dd>candidaturas</dd></div><div><dt class="d-favor">62</dt><dd>a favor</dd></div><div><dt class="d-contra">215</dt><dd>contra</dd></div><div><dt class="d-mix">3</dt><dd>misto</dd></div><div><dt>6</dt><dd>regimes</dd></div></dl>
@@ -1274,297 +1276,7 @@ A grave violação dos direitos humanos repercutida no conjunto da sociedade, a 
 <button class="cand-row" type="button" aria-expanded="false"><span class="cand-id"><span class="cand-name">ZÉ MEDEIROS</span><span class="who">PL · MT · Senador(a) · nº 222</span></span><span class="scale" role="img" aria-label="0 a favor, 0 misto, 1 contra"><span class="s-contra" style="flex:1"></span></span><span class="tally"><span class="t-contra">1 contra</span></span><span class="chev" aria-hidden="true"></span></button>
 <div class="cand-detail" hidden><div class="pos" data-hasspan="1"><p class="pos-head"><span class="regime">Uso medicinal</span><span class="chip chip-con">CONTRA</span></p><p class="pos-meta">01/09/2020 &nbsp;·&nbsp; posição histórica — registro anterior à legislatura atual</p><figure class="q"><blockquote>- Sr. Presidente, eu estou ouvindo esse debate de fundo aí. <mark>É incrível como têm facilidade de prescrever até maconha como medicinal, sem comprovação científica também.</mark> Neste momento de pandemia, eu vejo tanta gente falar sobre o que entende tão pouco. Nessa questão dos remédios para tratamento precoce existem divergências inclusive na comunidade científica, inclusive sobre esse remédio que está aí sob divergência. Então, é irresponsabilidade de um grupo quando pede a criminalização de quem defende o tratamento precoce.</blockquote><figcaption>01/09/2020 · <a href="https://imagem.camara.gov.br/dc_20b.asp?largura=&amp;altura=&amp;tipoForm=diarios&amp;selCodColecaoCsv=D&amp;Datain=2%2F9%2F2020&amp;txPagina=189&amp;txSuplemento=&amp;enviar=Pesquisar" target="_blank" rel="noreferrer">ver na fonte</a></figcaption></figure><p class="conf">confiança 0.80 — auto-atribuída pelo modelo, não calibrada · adjudicação: sabia-4</p></div></div></article>
 </main>
-<details class="method" id="metodologia"><summary>Metodologia completa</summary>
-<div class="method-body">
-<h1>VOTO — Metodologia completa</h1>
-<p>*Referência de engenharia. A página de metodologia voltada ao público é <code>data/methodology/methodology.md</code> (pt-BR); este documento é a descrição técnica completa, incluindo os prompts na íntegra, o modelo usado em cada etapa e o caminho de verificação humana.*</p>
-<p>Última atualização: 2026-09-07.</p>
-<hr>
-<h2>1. O que o VOTO produz</h2>
-<p>Para cada candidatura no escopo e cada um dos seis <strong>temas</strong> de política de cannabis, o VOTO atribui exatamente um de:</p>
-<ul>
-<li>uma <strong>posição publicada</strong> — <code>PRO</code> / <code>AGAINST</code> / <code>MIXED</code>, ou</li>
-<li>um <strong>código de motivo</strong> que explica a ausência — <code>NO_MATCHED_RECORD</code>, <code>RECORD_NO_TOPIC_CONTENT</code>, <code>NOT_SEARCHED</code>, <code>IDENTITY_QUARANTINED</code>, ou um código <code>WITHHELD_*</code>.</li>
-</ul>
-<p>Os seis temas (<code>voto.core.Topic</code>):</p>
-<table><thead><tr><th>enum</th><th>pt-BR</th><th>âncoras</th></tr></thead><tbody><tr><td><code>SELF_GROW</code></td><td>Cultivo pessoal</td><td>cultivo para consumo próprio, habeas corpus para cultivo, autorização ANVISA de plantio</td></tr><tr><td><code>DECRIMINALIZATION</code></td><td>Descriminalização do porte</td><td>porte para consumo pessoal, RE 635659 (STF), art. 28 da Lei 11.343</td></tr><tr><td><code>RECREATIONAL</code></td><td>Uso adulto / recreativo</td><td>uso adulto, legalização recreativa</td></tr><tr><td><code>REGULATE_AND_TAX</code></td><td>Regulamentação e tributação</td><td>mercado regulado, tributação, licenciamento de produção</td></tr><tr><td><code>MEDICAL</code></td><td>Uso medicinal</td><td>canabidiol, CBD, ANVISA, prescrição</td></tr><tr><td><code>INDUSTRIAL_HEMP</code></td><td>Cânhamo industrial</td><td>fibra, semente, têxtil/agroindustrial, THC baixo — <strong>não</strong> é uso medicinal</td></tr></tbody></table>
-<p><strong>"Sem registro federal" e "registro examinado, nada encontrado sobre este tema" são afirmações diferentes sobre uma pessoa e nunca são fundidas.</strong></p>
-<p><strong>Escopo da v1:</strong> somente São Paulo, somente registro federal (efeito colateral para deputados estaduais). O enriquecimento de Governador e Senador é um compromisso pós-v1 declarado explicitamente para que um lançamento de um único estado não se apresente de forma enganosa (decisão D-H).</p>
-<p><strong>Não-implicação (imposta em todo prompt que toca em posição, plano §8):</strong> Evidência de uso medicinal nunca implica apoio a uso recreativo ou regulamentação. Cânhamo industrial nunca implica uso medicinal.</p>
-<hr>
-<h2>2. Fontes de dados</h2>
-<table><thead><tr><th>Fonte</th><th>Uso</th><th>Adaptador</th></tr></thead><tbody><tr><td><strong>Zip CSV em massa do TSE</strong> (<code>consulta_cand_2026</code>)</td><td>Relação de candidaturas + CPF para resolução de identidade</td><td><code>TseCandidateCsvSource</code>, executado a partir de egress no BR; fixtures offline para CI</td></tr><tr><td>API aberta da <strong>Câmara dos Deputados</strong></td><td>Discursos de deputados (1 salto, <code>transcricao</code> inline), votos nominais</td><td><code>CamaraSpeechSource</code>, <code>IngestVotacoes</code></td></tr><tr><td>API aberta do <strong>Senado Federal</strong></td><td>Discursos de senadores (2 saltos: metadados + <code>div.texto-integral</code> via jsoup), votos (<code>/dadosabertos/votacao?ano=YYYY</code>)</td><td><code>SenadoSpeechClient</code>, <code>IngestVotacoesSenado</code></td></tr><tr><td><strong><code>data/bills/registry.yaml</code></strong></td><td>Registro de proposições curado e versionado — substitui a descoberta de proposições por palavra-chave</td><td><code>voto-registry</code></td></tr><tr><td>**<code>data/bills/vote-annotations*.yaml</code>**</td><td>Anotação curada por votação: é substantiva?, qual tema, o que um <code>SIM</code> significa</td><td>carregado pela Etapa B + cobertura</td></tr></tbody></table>
-<p>Todo texto legislativo cai num store <code>raw_document</code> / <code>speech</code> compartilhado e idempotente, com colunas de proveniência obrigatórias.</p>
-<hr>
-<h2>3. Pipeline</h2>
-<pre><code>corpus de discursos (~121k)
-   │
-   ▼  ┌───────────────────────────────────────────────┐
-   0. │ PRÉ-FILTRO (M2) — rede de recall por regex, sem modelo │  data/prefilter/speech-prefilter.yaml
-      └───────────────────────────────────────────────┘
-   │  ~2.600 discursos marcados como plausíveis
-   ▼  ┌───────────────────────────────────────────────┐
-   A. │ EXTRAÇÃO        — chamada de modelo, por discurso │  qwen2.5:14b · STAGE_A_SYSTEM_V2
-      └───────────────────────────────────────────────┘
-   │  trechos candidatos {topic, signal, quote, confidence, reasoning}
-   ▼  ┌───────────────────────────────────────────────┐
-   G. │ PORTÃO DE VERIFICAÇÃO — mecânico, SEM modelo   │  localizar-por-busca + segmentação de orador
-      └───────────────────────────────────────────────┘
-   │  trecho localizado exatamente uma vez, dentro do segmento do próprio orador
-   ▼  ┌───────────────────────────────────────────────┐
-   V. │ CLASSIFICADOR DE VOZ — chamada de modelo independente │  qwen2.5:14b · VOICE_SYSTEM  (sem vocabulário de posição)
-      └───────────────────────────────────────────────┘
-   │  apenas OWN_ASSERTION → evidence_span ;  senão → rejected_span
-   ▼  ┌───────────────────────────────────────────────┐
-   T. │ CLASSIFICADOR DE TEMA — chamada de modelo independente │  qwen2.5:14b · TOPIC_SYSTEM  (pode abster-se: NAO_TOPICAL)
-      └───────────────────────────────────────────────┘   [ordenação da fila de revisão + A15; não é portão de publicação]
-   │
-   ▼  ┌───────────────────────────────────────────────┐
-   B. │ ADJUDICAÇÃO     — chamada de modelo, por (cand,tema) │  sabia-4 (API Maritaca) · STAGE_B_SYSTEM
-      └───────────────────────────────────────────────┘   sobre trechos verificados + documento completo + sinais de voto curados
-   │  {stance, confidence, rationale}
-   ▼  ┌───────────────────────────────────────────────┐
-   R. │ RECÊNCIA (D-G)  — mecânico                     │  leg-57 → CURRENT · leg-56 → HISTORICAL · mais antigo → STALE
-   W. │ POLÍTICA DE RETENÇÃO — mecânico                │  publica só se evidência ≥ 1 E confiança ≥ τ
-   C. │ DERIVAÇÃO DE COBERTURA — mecânico             │  função pura dos contadores → reason_code
-      └───────────────────────────────────────────────┘
-   │
-   ▼  Superfície 1 (artefato publicado, só linhas PUBLISHED)   Superfície 2 (consulta, toda candidatura)
-</code></pre>
-<p>Toda saída de modelo é carimbada com proveniência: <code>(run_id, model, prompt_version)</code> faz parte da identidade de todo <code>evidence_span</code> / <code>stance_assessment</code>. Toda rejeição é retida em <code>rejected_span</code> e nunca chega à adjudicação.</p>
-<hr>
-<h2>4. Etapa 0 — Pré-filtro (M2)</h2>
-<p><strong>Modelo:</strong> nenhum. Uma única alternância de regex, sem distinção de maiúsculas, sobre o texto integral de cada discurso.</p>
-<p><strong>Arquivo:</strong> <code>data/prefilter/speech-prefilter.yaml</code>, <code>version: v3-2026-09-01</code>, carimbado em toda medição a jusante.</p>
-<p><strong>Concepção:</strong> uma <strong>rede grossa de recall</strong>, deliberadamente super-inclusiva. Decide apenas "este discurso é um candidato plausível para a Etapa A" — nunca um tema, nunca uma posição. Justificativa (plano §9, pre-mortem S6): um falso positivo custa tokens da Etapa A; um falso negativo é evidência que nunca existe e vira um falso "nenhuma posição encontrada" sobre um parlamentar nomeado.</p>
-<p><strong>Termos (resumido):</strong> <code>cannabis</code>, <code>maconha</code>, <code>canabidiol</code>, <code>canabin\w*</code>, <code>c[aâ]nhamo</code>, <code>psicoativ\w*</code>, <code>\berva\b</code>; gíria de rua em pt-BR (<code>\bverdinha\b</code>, <code>\bcigarrinho\b</code>, <code>\bfininho\b</code>, <code>maria\s*joana</code>, …, cada um medido contra o corpus completo antes da inclusão); e uma rede de política de drogas (<code>\bdrogas?\b</code>, <code>entorpecente\w*</code>, <code>narcotr[áa]fico</code>, <code>descriminaliz\w*</code>, <code>despenaliz\w*</code>, <code>11\.?343</code>, …). Cada termo adicionado carrega uma nota <code>source:</code> com sua contagem medida de ocorrências no corpus. Termos deliberadamente <strong>excluídos</strong> (<code>redução de danos</code>, <code>mato</code> isolado, <code>baseado</code> isolado, <code>fumo</code> isolado) estão listados no arquivo com a medição que os rejeitou, de modo que cada omissão seja uma decisão e não um descuido.</p>
-<p>O conjunto de discursos que casam é o <strong>pool M2</strong>. Só discursos M2 chegam à Etapa A.</p>
-<hr>
-<h2>5. Etapa A — Extração</h2>
-<p><strong>Componente:</strong> <code>voto.analysis.StageAExtractor</code> → <code>StageAPipeline.runOnSpeech</code>. <strong>Modelo (plano):</strong> <code>claude-sonnet-5</code>, API de Message Batches. <strong>Modelo (produção):</strong> <code>qwen2.5:14b</code> via <code>/v1/chat/completions</code> compatível com OpenAI do Ollama, <code>temperature = 0</code>. (Direção do usuário 2026-08-27 — modelo local, sem API de Batch, sem cache de prompt. <code>temperature=0</code> é de fato alcançável aqui, o que torna o portão de flip-rate *mais* significativo.) <strong>Versão do prompt:</strong> <code>stageA-v2-2026-08-27</code> (<code>StageAPrompts.PROMPT_VERSION</code>). <strong>Chamada:</strong> uma por discurso M2, o discurso inteiro como mensagem do usuário, restrita por JSON-schema.</p>
-<h3>Prompt de sistema — <code>STAGE_A_SYSTEM_V2</code> (verbatim, <code>StageAPrompts.kt</code>)</h3>
-<p>&gt; Você analisa discursos parlamentares brasileiros sobre política de drogas e cannabis. Extraia trechos VERBATIM que expressem uma posição do orador sobre: descriminalização do porte, legalização/uso adulto, regulamentação e tributação, uso medicinal, cultivo pessoal, ou cânhamo industrial. IMPORTANTE: no debate brasileiro a descriminalização é frequentemente discutida como 'porte de drogas' ou 'porte de entorpecentes' sem nomear a maconha — esses trechos CONTAM. Excluir apenas relatos de dependência química, elogios a apreensões policiais e casos pessoais sem posição sobre política. Copie o trecho EXATAMENTE. Não invente trechos.</p>
-<p>Essa string é portada <strong>verbatim</strong> da referência validada da Fase 0a (<code>phase0a/run_pipeline.py</code>, <code>SYS_A_V2</code> — a correção medida de recall sobre <code>SYS_A_V1</code>, cuja cláusula de exclusão apagava trechos verdadeiros). Uma rubrica reescrita é uma rubrica não medida; mudar qualquer caractere incrementa <code>PROMPT_VERSION</code>.</p>
-<h3>Prompt do usuário — <code>stageAUser</code></h3>
-<pre><code>&lt;discurso&gt;
-{texto integral do discurso}
-&lt;/discurso&gt;
-</code></pre>
-<h3>Esquema de saída — <code>STAGE_A_SCHEMA</code></h3>
-<pre><code>{ "spans": [ {
-    "topic":      "SELF_GROW | DECRIMINALIZATION | RECREATIONAL | REGULATE_AND_TAX | MEDICAL | INDUSTRIAL_HEMP",
-    "signal":     "PRO | AGAINST | AMBIGUOUS",
-    "quote":      "string — SAÍDA DO MODELO, nunca renderizada verbatim a jusante",
-    "confidence": "number 0..1",
-    "reasoning":  "string"
-} ] }
-</code></pre>
-<p>Offsets de caractere fornecidos pelo modelo <strong>não</strong> são pedidos — o plano os trata como uma dica não confiável; o portão localiza por busca (§6).</p>
-<p>Uma resposta que não seja JSON, que omita <code>spans</code>, ou que nomeie um topic/signal fora da taxonomia é uma <strong>falha de parse</strong> (<code>SpeechExtractionResult.parseFailure</code>) — mantida distinta do caso comum de "o discurso não contém posição", porque essa distinção é o eixo no qual um modelo mais forte mostraria vantagem.</p>
-<hr>
-<h2>6. Portão de verificação (mecânico — sem modelo)</h2>
-<p><strong>Componente:</strong> <code>voto.analysis.VerificationGate.locateRaw</code> + <code>SpanVerifier</code> + <code>SpeakerSegmenter</code>. Portado de <code>phase0a/run_pipeline.py::locate</code>, verificado em 20 discursos reais da Câmara (20/20 trechos genuínos localizados, 20/20 trechos com adulteração de um único caractere rejeitados, trecho fabricado rejeitado em todos os 20).</p>
-<ol>
-<li><strong>Localizar por busca, não por offset.</strong> Normalizar (NFC + colapso de espaço em branco), depois encontrar o <code>quote</code> do modelo como substring da fonte. Offsets são sempre tomados contra o texto original via o casamento.</li>
-</ol>
-<ul>
-<li>1 ocorrência → <strong>localizado</strong>.</li>
-<li>0 ocorrências → <strong><code>QUOTE_MISMATCH</code></strong> (rejeitado). Um trecho fabricado ou parafraseado não sobrevive. (É por isso que um modelo que traduz ou reformula trechos — p. ex. <code>sabia-7b</code> — falha por completo.)</li>
-<li>&gt;1 ocorrência → <strong><code>AMBIGUOUS_LOCATION</code></strong> (rejeitado).</li>
-</ul>
-<ol>
-<li><strong>Segmentação de orador.</strong> Uma <code>transcricao</code> da Câmara não tem garantia de conter apenas as palavras do sujeito (medido: 5,7% de 350 registros reais embutem outro orador, tipicamente <code>O SR. PRESIDENTE</code>). O trecho só é admissível dentro de um segmento cujo cabeçalho case com o sujeito do registro. Matcher fail-closed: casamento exato de nome curto OU ≥2 tokens distintivos compartilhados; ambiguidade é excluída (falso-rejeita medido 0/350, falso-aceita 0/27). Um trecho de outro orador é rejeitado <code>CROSS_SPEAKER_ATTRIBUTION</code>.</li>
-<li><strong>Envelope.</strong> <code>Envelope.expand</code> — a frase do trecho ±2 frases, limitado ao segmento do orador. Este é apenas um envelope de <strong>renderização</strong>, nunca a unidade de adjudicação.</li>
-</ol>
-<p>Os valores de <code>RejectionReason</code> sobreviventes são armazenados em <code>rejected_span</code>: <code>QUOTE_MISMATCH</code>, <code>AMBIGUOUS_LOCATION</code>, <code>NOT_OWN_ASSERTION</code>, <code>CROSS_SPEAKER_ATTRIBUTION</code>.</p>
-<hr>
-<h2>7. Classificador de voz (chamada de modelo independente)</h2>
-<p><strong>Componente:</strong> <code>voto.analysis.VoiceClassifier</code>. <strong>Modelo:</strong> plano <code>claude-sonnet-5</code> (uma chamada separada); produção <strong><code>qwen2.5:14b</code></strong> — mantido local: esta é a chamada de descorrelação e não tem deficiência medida; não foi comparada separadamente com <code>sabia-4</code>, e um modelo hospedado nesta chamada por trecho multiplicaria o custo sem ganho estabelecido. <strong>Por que separada:</strong> descorrelação. O prompt do classificador não contém <strong>nenhum vocabulário de posição</strong>, de modo que uma conclusão de posição da Etapa A não possa vazar para o julgamento de voz (plano §3(c).3). Roda sobre o <strong>envelope</strong>, não o documento inteiro. <strong>Fail-closed:</strong> uma falha de parse é tratada como "não <code>OWN_ASSERTION</code>" — o trecho é rejeitado.</p>
-<h3>Prompt de sistema — <code>VOICE_SYSTEM</code> (verbatim)</h3>
-<p>&gt; Você classifica a estrutura pragmática de um trecho dentro de um discurso parlamentar brasileiro. Responda APENAS: o trecho é uma afirmação do próprio orador (OWN_ASSERTION), uma proposição relatada/atribuída a terceiros (REPORTED_PROPOSITION), uma condicional (CONDITIONAL), uma hipótese (HYPOTHETICAL), ou uma pergunta retórica (RHETORICAL_QUESTION)? Oradores frequentemente enunciam a tese do adversário antes de refutá-la: isso é REPORTED_PROPOSITION mesmo em primeira pessoa.</p>
-<h3>Prompt do usuário — <code>voiceUser</code></h3>
-<pre><code>&lt;contexto&gt;
-{texto do envelope}
-&lt;/contexto&gt;
-
-&lt;trecho&gt;
-{trecho}
-&lt;/trecho&gt;
-</code></pre>
-<h3>Esquema de saída — <code>VOICE_SCHEMA</code></h3>
-<pre><code>{ "voice": "OWN_ASSERTION | REPORTED_PROPOSITION | CONDITIONAL | HYPOTHETICAL | RHETORICAL_QUESTION",
-  "reasoning": "string" }
-</code></pre>
-<p><strong>Só <code>OWN_ASSERTION</code> pode carregar uma posição.</strong> Todo o resto → <code>rejected_span</code> (<code>NOT_OWN_ASSERTION</code>). Um trecho que passa pelo portão <strong>e</strong> pelo classificador de voz vira um <code>evidence_span</code>.</p>
-<hr>
-<h2>8. Classificador de tema (chamada de modelo independente)</h2>
-<p><strong>Componente:</strong> <code>voto.analysis.TopicClassifier</code>. <strong>Modelo:</strong> <strong><code>qwen2.5:14b</code></strong> — mantido local: <code>sabia-4</code> era mensuravelmente *pior* na atribuição de tema na sonda pareada (57–76% de má-atribuição nos trechos revisados, contra 65% da baseline armazenada), e perdeu ~30% dos trechos em recall. <strong>Papel:</strong> um julgamento de tema *separado* e descorrelacionado sobre um trecho já extraído <code>(envelope, quote [, ementa + palavras-chave do discurso])</code>. Seu poder distintivo é o veredito de <strong>abstenção</strong> <code>NAO_TOPICAL</code>, que o esquema da Etapa A estruturalmente não tem (o enum <code>topic</code> da Etapa A tem seis valores e nenhum "nenhum", então um trecho fora de tema força um chute). É usado para <strong>ordenar a fila de revisão humana</strong> (posições primeiro) e para computar a métrica <strong>A15</strong> (taxa de má-atribuição de tema). <strong>Não é um portão de publicação</strong> na v1.</p>
-<h3>Prompt de sistema — <code>TOPIC_SYSTEM</code> (verbatim, resumido do bloco de taxonomia interpolado)</h3>
-<p>&gt; Você classifica o TEMA de um trecho já extraído de um discurso parlamentar brasileiro. Não extraia nada e não reescreva o trecho: apenas classifique o trecho fornecido. &gt; &gt; *{<code>voto.core.topicBlockPt()</code> — os seis temas com seus nomes e âncoras em pt-BR}* &gt; &gt; *{<code>voto.core.NON_ENTAILMENT_PT</code> — "cultivo pessoal NÃO é uso adulto; uso medicinal NÃO é uso recreativo nem regulamentação; cânhamo industrial NÃO é uso medicinal."}* &gt; &gt; NAO_TOPICAL — use quando o trecho NÃO trata de nenhum dos temas acima. Isso inclui: drogas em geral sem identificar regime de cannabis, tráfico, policiamento, dependência química, e qualquer assunto alheio (saudações, homenagens, outros projetos). Responder NAO_TOPICAL é a resposta CORRETA nesses casos, não uma falha — prefira NAO_TOPICAL a escolher um tema que o texto não identifica. &gt; &gt; Quando houver &lt;discurso&gt;, a ementa e as palavras-chave descrevem o DISCURSO INTEIRO, não o trecho. Use-as para identificar QUAL regime está em debate quando o trecho sozinho não o identifica […]. NÃO as use para atribuir um tema a um trecho que trata de outro assunto […].</p>
-<h3>Esquema de saída — <code>TOPIC_SCHEMA</code></h3>
-<pre><code>{ "topic": "SELF_GROW | DECRIMINALIZATION | RECREATIONAL | REGULATE_AND_TAX | MEDICAL | INDUSTRIAL_HEMP | NAO_TOPICAL",
-  "reasoning": "string" }
-</code></pre>
-<p>Os resultados caem em <code>span_topicality</code> (topic + <code>TopicalityTier</code> + as entradas lexicais + <code>model</code> + <code>prompt_version</code>).</p>
-<hr>
-<h2>9. Etapa B — Adjudicação</h2>
-<p><strong>Componente:</strong> <code>voto.analysis.StageBAdjudicator</code>. <strong>Modelo (plano):</strong> <code>claude-opus-5</code>, <code>thinking { adaptive }</code>, esforço <code>HIGH</code> (<code>MAX</code> para o conjunto de ouro) — *"a decisão de julgamento que define o que é publicado — não economize aqui."* <strong>Modelo (produção):</strong> <strong><code>sabia-4</code> (API Maritaca)</strong> — <code>--provider ollama --base-url https://chat.maritaca.ai/api --model sabia-4</code>, <code>Authorization: Bearer</code> da env <code>VOTO_LLM_API_KEY</code>. O <code>LlmClient</code> o dirige sem modificação: <code>/v1/chat/completions</code> honra <code>response_format: json_schema</code>, e <code>ignoreUnknownKeys</code> absorve os campos extras da resposta da Maritaca. <strong>APLICADO em 2026-09-07T20:30.</strong> Até essa execução esta seção descrevia uma troca que havia sido decidida e nunca executada: toda avaliação armazenada era <code>qwen2.5:14b</code>, ao longo de oito execuções de adjudicação no ledger. A re-adjudicação completa (475 unidades, 338 chamadas de modelo, 0 falhas) está agora no ledger como <code>model=sabia-4</code>, então esta seção finalmente descreve o que produziu os artefatos.</p>
-<p><strong>O que a troca de fato mudou</strong>, medido contra um snapshot do estado anterior — 82 de 475 unidades se moveram, mas só 7 mudaram uma direção PUBLISHED:</p>
-<table><thead><tr><th></th><th></th></tr></thead><tbody><tr><td>posição PUBLISHED mudou</td><td>7</td></tr><tr><td>agora PUBLISHED</td><td>10</td></tr><tr><td>não mais PUBLISHED</td><td>8</td></tr><tr><td>posição mudou, nenhum ramo publica</td><td>57</td></tr></tbody></table>
-<p>Cinco das sete são as inversões de sinal que a sonda pareada encontrou, e o sabia-4 chegou à leitura do curador em <strong>todas as cinco independentemente</strong> — Prof. Paulo Fernando e Marcio Miguel Bittar em DECRIMINALIZATION, José Nelto, Eros Biondini e Mauricio Marcon em REGULATE_AND_TAX, todas <code>PRO → AGAINST</code>. As outras duas são <code>Osmar Terra</code> (MEDICAL, <code>AGAINST → MIXED</code>) e <code>Dra. Soraya Manato</code> (MEDICAL, <code>PRO → MIXED</code>) — ambas em MEDICAL, e ambas na direção do <strong>excesso conhecido em MEDICAL</strong> registrado abaixo. Essa ressalva não é teórica; agora está visível no conjunto publicado e é a coisa a observar.</p>
-<p>Os totais de estado de publicação se moveram <code>PUBLISHED 225 → 227</code>, <code>NO_EVIDENCE 142 → 124</code>, <code>WITHHELD 108 → 124</code>. O sabia-4 compromete uma posição onde o qwen se absteve em 18 unidades, mas 16 dessas caem em <code>WITHHELD_SINGLE_SPAN</code> — a política de retenção, não o modelo, é o que as mantém fora do artefato.</p>
-<p><code>Eli Borges / MEDICAL</code> <strong>não</strong> se moveu: o sabia-4 ainda lê PRO onde o curador lê AGAINST. Ambos os modelos tomam a defesa de um projeto medicinal-apenas pelo valor de face em vez de como tática contra o PL 399/2015. Uma troca de modelo não conserta ser ludibriado por enquadramento estratégico, e o <code>stance_correction</code> para essa unidade ainda está fazendo trabalho.</p>
-<p><strong>Por que não o modelo local aqui.</strong> Uma avaliação de 3 vias em 2026-09-07 (qwen2.5:14b vs <code>sabia-4</code> vs <code>sabiazinho-4</code>, 149 unidades <code>(candidato, tema)</code>, τ=0.7) constatou que nas ~38 unidades onde <code>sabia-4</code> e qwen discordam, a leitura do <code>sabia-4</code> era a mais defensável: corrigiu o qwen em 2–3 das 3 inversões <code>PRO↔AGAINST</code> ambas publicadas (o qwen tinha ancorado em trechos mal extraídos fora de tema, ou emitido um rótulo que contradizia sua própria justificativa), e em ~12 de 19 unidades <code>NO_EVIDENCE→AGAINST</code> a *própria* justificativa do qwen já declarava a posição AGAINST antes de retê-la. O <code>sabia-4</code> aplica a implicação sólida "opõe-se a <strong>toda</strong> legalização ⟹ opõe-se a <code>REGULATE_AND_TAX</code> / <code>SELF_GROW</code>" (ambos os regimes pressupõem legalização) que o qwen se recusa a aplicar. O <code>sabiazinho-4</code> foi rejeitado — ele quase para de se abster (<code>NO_EVIDENCE</code> 43→8) e produz inversões de sinal publicadas cegas ao contexto. <strong>Ressalvas carregadas por esta escolha:</strong></p>
-<ul>
-<li><strong>Não validada.</strong> Não existe conjunto de ouro (questão em aberto B-a), então "mais defensável na fatia de discordância" é um juízo de inspeção, não uma medição. O conjunto de ouro é o que confirma ou reverte isso; <code>qwen2.5:14b</code> é mantido como fallback e referência de reprodutibilidade local para esta etapa.</li>
-<li><strong>Excesso conhecido — MEDICAL.</strong> O <code>sabia-4</code> super-generaliza "anti-recreativo ⟹ anti-medicinal", que é uma clivagem política pt-BR real. Os estratos de ouro <code>MEDICAL_ONLY</code> / <code>HEMP_MEDICAL</code> (§13.1) são os que se deve observar.</li>
-<li><strong>Dependência externa no caminho de publicação.</strong> API paga; ~US$1–2 por execução completa da Etapa B; <strong>o texto de discurso por <code>(candidato, tema)</code> é enviado à Maritaca</strong>. Esta etapa não é reproduzível localmente.</li>
-<li><strong>Lacuna de robustez.</strong> O <code>LlmClient</code> não tem tratamento de status HTTP / corpo de erro — um objeto de erro da Maritaca (p. ex. uma rejeição por tamanho de contexto) lança um <code>JsonConvertException</code> na desserialização de <code>ChatResponse</code>. Uma unidade (<code>pid=487</code> / <code>DECRIMINALIZATION</code>) falhou deterministicamente com ambos os modelos Sabiá; o <code>catch</code> por unidade a descarta e a execução continua. Correção pendente.</li>
-</ul>
-<p><strong>Versão do prompt:</strong> <code>stageB-v1-2026-08-27</code> (<code>StageBPrompts.PROMPT_VERSION</code>) — inalterada; o prompt é agnóstico de modelo e não foi re-ajustado para o <code>sabia-4</code>. <strong>Unidade:</strong> uma chamada por <code>(candidato, tema)</code> que tenha ≥1 <code>evidence_span</code> <strong>ou</strong> uma anotação de voto substantiva curada. <strong>Entradas:</strong> os trechos verificados (quote + envelope), o(s) <strong>documento(s)-fonte completo(s), verificado(s) byte a byte</strong>, e as strings de sinal de voto curadas. A recência (D-G) é aplicada à evidência *antes* de ela chegar a este prompt — trechos antigos são descartados de qualquer unidade que também tenha trechos publicáveis (<code>RecencyClassifier.retainPublishable</code>), de modo que blockquotes de uma década nunca renderizem sob uma data atual.</p>
-<h3>Prompt de sistema — <code>STAGE_B_SYSTEM</code> (verbatim, <code>StageB.kt</code>)</h3>
-<p>&gt; Você adjudica a posição de um parlamentar sobre UM tema de política de cannabis, usando apenas os trechos verificados fornecidos e o documento completo como contexto. Evidência sobre uso medicinal NUNCA implica apoio a uso recreativo ou regulamentação. Cânhamo industrial NUNCA implica uso medicinal. Na dúvida, responda NO_EVIDENCE.</p>
-<p>Portado <strong>verbatim</strong> da referência da Fase 0a (<code>SYS_B</code>).</p>
-<h3>Prompt do usuário — <code>StageBPrompts.user</code></h3>
-<pre><code>&lt;tema&gt;{TOPIC}&lt;/tema&gt;
-&lt;trechos_verificados&gt;
-1. "{trecho 1}"
-   contexto: "{envelope 1}"
-2. "{trecho 2}"
-   contexto: "{envelope 2}"
-&lt;/trechos_verificados&gt;
-&lt;documento_completo&gt;
-{documento completo 1}
-
----
-
-{documento completo 2}
-&lt;/documento_completo&gt;
-&lt;sinais_de_voto_curados&gt;          ← só quando existem anotações de voto curadas
-- {string de sinal de voto}
-&lt;/sinais_de_voto_curados&gt;
-</code></pre>
-<h3>Esquema de saída — <code>StageBPrompts.SCHEMA</code></h3>
-<pre><code>{ "stance":     "PRO | AGAINST | MIXED | NO_EVIDENCE",
-  "confidence": "number 0..1  — afirmada pelo modelo, NÃO CALIBRADA",
-  "rationale":  "string  — nunca renderizada na Superfície 1 ou 2 (prevenção de vazamento de placar V4.7)" }
-</code></pre>
-<p>A saída é escrita em <code>stance_assessment</code>. Uma resposta não-JSON / com posição não reconhecida é um <code>StageBUnusableResponse</code>; o <code>catch</code> por unidade pula aquela unidade e a execução continua (unidades finalizadas já estão comitadas).</p>
-<hr>
-<h2>10. Pós-adjudicação — mecânico, sem modelo</h2>
-<h3>10.1 Recência (D-G) — <code>RecencyClassifier</code></h3>
-<table><thead><tr><th>data da evidência</th><th>classe</th><th>efeito</th></tr></thead><tbody><tr><td>≥ 2023-02-01 (posse da leg 57)</td><td><code>CURRENT</code></td><td>pode renderizar como posição atual</td></tr><tr><td>≥ 2019-02-01 (posse da leg 56)</td><td><code>HISTORICAL</code></td><td>publicada <strong>datada e rotulada como histórica</strong></td></tr><tr><td>mais antiga</td><td><code>STALE</code></td><td><code>WITHHELD_STALE_EVIDENCE</code></td></tr></tbody></table>
-<p>A recência de uma avaliação é a do seu trecho <strong>mais recente</strong>. Os cortes são parâmetros (mudam a cada legislatura), não constantes.</p>
-<h3>10.2 Política de retenção — <code>evaluateWithholding(input, tau)</code></h3>
-<p>Publica só se <code>(verified_spans ≥ 1 OU substantive_annotated_votes ≥ 1) E confiança ≥ τ</code>.</p>
-<ul>
-<li><strong><code>τ</code> é um placeholder não calibrado.</strong> O mapeamento confiança-crua→faixa e o limiar numérico são calibrados pelo conjunto de ouro, e o conjunto de ouro ainda não existe (Fase 0c). O padrão da CLI <code>--tau 0.7</code> imprime um aviso barulhento. O que *está* totalmente especificado são os <strong>tetos estruturais</strong> sobre qual faixa de confiança uma dada composição de evidência pode alcançar, independentemente do número afirmado pelo modelo:</li>
-<li>um único trecho verificado nunca alcança <code>HIGH</code>;</li>
-<li>trechos manuais + automatizados não podem *combinar* para alcançar <code>HIGH</code>;</li>
-<li>evidência manual derivada de transcrição nunca alcança <code>HIGH</code> em qualquer contagem;</li>
-<li>só-voto nunca alcança <code>HIGH</code> na v1 (medido — nenhum dos projetos-marco tem voto nominal em plenário da Câmara).</li>
-<li><strong><code>adjudicatedNoPosition</code></strong> (a Etapa B retornou <code>NO_EVIDENCE</code> com trechos presentes) → junta-se ao ramo sem-evidência: mesma afirmação pública ("nenhuma posição encontrada"), <code>publish_state = NO_EVIDENCE</code>. Isso existe porque a publicação já foi decidida por *composição* de evidência sozinha, e o artefato de SP nomeou seis pessoas sob cabeçalhos "NO_EVIDENCE" com um trecho impresso abaixo.</li>
-<li><strong>A precedência de código de motivo é total</strong> (plano §6): <code>PUBLISHED</code> &gt; <code>WITHHELD_AMBIGUOUS_VOICE</code> &gt; <code>WITHHELD_STALE_EVIDENCE</code> &gt; <code>WITHHELD_SINGLE_SPAN</code> &gt; <code>WITHHELD_LOW_CONFIDENCE</code> &gt; <code>WITHHELD_UNANNOTATED_VOTE</code> &gt; <code>WITHHELD_REFUSAL</code> &gt; <code>IDENTITY_QUARANTINED</code>.</li>
-<li>Uma recusa curto-circuita tudo (<code>WITHHELD_REFUSAL</code>). Não há sinal de recusa em nível de transporte num modelo local, então isso é inferido, não lido de <code>stop_reason</code>.</li>
-</ul>
-<h3>10.3 Derivação de cobertura — <code>deriveReasonCode(counters, assessment?)</code></h3>
-<p>Para todo <code>(candidato, tema)</code>, <code>reason_code</code> é uma <strong>função pura</strong> dos contadores de cobertura, ordenada para que a ambiguidade nunca resolva na direção da afirmação mais afirmativa:</p>
-<ol>
-<li>existe uma avaliação → seu próprio código de motivo;</li>
-<li>nenhum registro federal (<code>resolvedLinkCount == 0</code>): <code>quarantinedLinkCount &gt; 0</code> → <code>IDENTITY_QUARANTINED</code>, senão <code>NO_MATCHED_RECORD</code> — <strong>verificado antes</strong> de qualquer código de "examinou o registro" (pre-mortem S3);</li>
-<li>existe um voto curado sobre o tema mas nenhuma posição adjudicada → <code>WITHHELD_UNANNOTATED_VOTE</code>;</li>
-<li>existe um registro: nenhum documento ingerido → <code>NOT_SEARCHED</code>; documentos mas nenhum sobre este tema (ou documentos sobre o tema sem posição sobrevivente) → <code>RECORD_NO_TOPIC_CONTENT</code>.</li>
-</ol>
-<hr>
-<h2>11. Superfícies</h2>
-<table><thead><tr><th></th><th>Superfície 1 — artefato publicado</th><th>Superfície 2 — consulta</th></tr></thead><tbody><tr><td>Governada por</td><td>C5 / A16 / A24 / A25</td><td>P2</td></tr><tr><td>Conteúdo</td><td><strong>só</strong> linhas <code>reason_code = PUBLISHED</code>, via <code>PublicationView</code> (uma projeção SQL que estruturalmente não pode emitir uma candidatura não publicada)</td><td><strong>toda</strong> candidatura, com contadores de cobertura + código de motivo</td></tr><tr><td>Nomes</td><td>só candidaturas publicadas; candidaturas não publicadas não são enumeradas</td><td>todos</td></tr><tr><td>Identidade</td><td><code>display_name = name_social ?: ballot_name</code>; <code>name_civil</code> / CPF nunca lidos</td><td>mesma regra, no servidor</td></tr><tr><td><code>rationale</code></td><td>nunca carregada na Superfície 1 (remove o vazamento de placar V4.7 por construção)</td><td>nunca</td></tr><tr><td>Trecho</td><td><code>substring(full_text, context_start, context_end)</code> — a fonte armazenada, nunca a string <code>quote</code> do modelo</td><td>—</td></tr><tr><td>Pisos</td><td><strong>A25 (revisado 2026-09-07):</strong> <code>&lt; 8</code> nomes publicáveis → <code>status = PARTIAL_RECORD</code>; <strong>os nomes SÃO publicados</strong>, atrás de uma divulgação renderizada antes do primeiro nome. <code>0</code> nomes → <code>NO_PUBLISHED_POSITIONS</code>. <strong>A24:</strong> um tema unidirecional recebe uma nota de ação declarada.</td><td>—</td></tr><tr><td>Entrega</td><td><code>voto report --uf SP</code> escreve <code>&lt;UF&gt;.json</code> + <code>&lt;UF&gt;.html</code>, roda o <code>ArtifactAudit</code>, <strong>sai com código não-zero em qualquer violação</strong></td><td>`voto lookup --name</td><td>--tse-seq-id<code>; mais um formulário web somente-leitura (</code>voto-web<code> + </code>frontend/`)</td></tr></tbody></table>
-<h3>A25 — por que o piso parou de reter (2026-09-07)</h3>
-<p>O plano (tabela de critérios, e a discussão A24/A25) sempre deu ao A25 <strong>dois</strong> ramos: abaixo de 8 parlamentares publicados distintos o artefato "deve ser retido <strong>ou publicado apenas como um registro parcial explicitamente rotulado</strong>". Só o ramo de retenção jamais foi construído, então uma UF com três posições reais, com fonte, publicáveis não publicava nada — e quatro UFs ficaram em <code>WITHHELD_INSUFFICIENT_NAMES</code> em 2026-09-07 exatamente por isso.</p>
-<p>O segundo ramo é agora o adotado. O raciocínio: o piso existe para que um leitor não confunda um punhado de nomes com um levantamento da UF. Isso é um problema de <strong>divulgação</strong>, e a retenção o resolvia destruindo a resposta. Uma candidatura de 2026 nomeada com um trecho verificado byte a byte é um fato sobre o registro público; suprimi-la porque só duas outras passaram por uma barra arbitrária não serve a ninguém tentando descobrir onde sua candidatura se posiciona.</p>
-<p>O que ainda protege o leitor, e é imposto em vez de assumido:</p>
-<ul>
-<li><code>status = PARTIAL_RECORD</code> sempre que <code>0 &lt; publishedCount &lt; 8</code>, e a divulgação é renderizada <strong>antes do primeiro nome</strong>, de modo que não possa ser ignorada. Um teste fixa a ordenação.</li>
-<li>O <code>ArtifactAudit</code> A25 agora verifica o RÓTULO nas duas direções — nomes abaixo do piso sem <code>PARTIAL_RECORD</code>, <code>PARTIAL_RECORD</code> alegado no piso ou acima, e <code>PARTIAL_RECORD</code> sem divulgação na saída renderizada. Um campo de status que ninguém renderiza não protege ninguém.</li>
-<li>A verificação de contagem de nomes do A16 foi ampliada de <code>status == "OK"</code> para todo artefato que renderiza nomes. Condicioná-la a <code>OK</code> teria deixado os artefatos pequenos — aqueles onde um único erro de contagem é proporcionalmente pior — sem verificação.</li>
-<li>A nomeação continua restrita a candidaturas de 2026 por construção: <code>PublicationView</code> lê <code>coverage JOIN candidate</code>, então uma não-candidatura é estruturalmente irrepresentável.</li>
-</ul>
-<p><code>NO_PUBLISHED_POSITIONS</code> é mantido distinto de <code>PARTIAL_RECORD</code>: ninguém nomeado porque ninguém tem posição publicável é uma afirmação sobre o REGISTRO, não sobre o piso, e deve continuar lendo como ausência de registro em vez de ausência de posição.</p>
-<p>O <code>ArtifactAudit</code> re-deriva A16 (contagem vs BD), A17 (nenhuma sequência de 11 dígitos na saída renderizada), A18 (nenhum nome civil de candidatura com nome social), A20 (carimbos de as-of), A23a (re-checagem do <code>SpeakerSegmenter</code> em todo trecho publicado), A6 (nenhuma identidade só-em-quarentena), autoconsistência A24/A25 — sobre o BD entregue e o artefato renderizado.</p>
-<hr>
-<h2>12. Seleção de modelo — um modelo por etapa (híbrido)</h2>
-<p>O pipeline de produção usa <strong>o modelo melhor medido para cada etapa</strong>, não um único modelo em tudo. Isso desvia tanto do plano §4 (<code>claude-sonnet-5</code> / <code>claude-opus-5</code>) quanto da direção "tudo local" de 2026-08-27; cada escolha abaixo é sobre evidência medida.</p>
-<table><thead><tr><th>Etapa</th><th>Modelo de produção</th><th>Cliente</th><th>Por que este modelo</th></tr></thead><tbody><tr><td>Extração Etapa A</td><td><strong><code>qwen2.5:14b</code></strong> (local, Ollama, <code>temperature=0</code>)</td><td><code>LlmClient</code>, <code>localhost:11434</code></td><td><code>sabia-4</code> perde ~30% dos trechos em recall (estável em dois prompts ⇒ modelo, não ruído) sem ganho de precisão de tema</td></tr><tr><td>Classificador de voz</td><td><strong><code>qwen2.5:14b</code></strong> (local)</td><td><code>LlmClient</code></td><td>chamada de descorrelação, sem deficiência medida; não comparada separadamente, e uma chamada hospedada por trecho multiplica o custo sem ganho estabelecido</td></tr><tr><td>Classificador de tema</td><td><strong><code>qwen2.5:14b</code></strong> (local)</td><td><code>LlmClient</code></td><td><code>sabia-4</code> mensuravelmente pior na atribuição de tema (57–76% de má-atribuição vs 65% da baseline) e perde recall</td></tr><tr><td><strong>Adjudicação Etapa B</strong></td><td><strong><code>sabia-4</code></strong> (API Maritaca)</td><td><code>LlmClient</code>, <code>chat.maritaca.ai/api</code>, chave Bearer</td><td>na fatia de discordância a leitura do <code>sabia-4</code> é mais defensável — corrigiu o qwen em 2–3 de 3 inversões de sinal publicadas; aplica uma implicação sólida que o qwen recusa (§9). <strong>Não validada, pendente do conjunto de ouro.</strong></td></tr><tr><td>portão · segmentação · recência · retenção · cobertura · auditoria</td><td><strong>nenhum</strong> (determinístico)</td><td>—</td><td>—</td></tr></tbody></table>
-<p><strong>Consequências dos modelos locais (Etapa A / voz / tema):</strong> nenhum sinal <code>stop_reason == "refusal"</code> (então <code>WITHHELD_REFUSAL</code> é inferido, não lido); sem cache de prompt, sem API de Batch; <code>temperature=0</code> *é* alcançável, o que torna o portão <code>stance_flip_rate ≤ 5%</code> (A7) mais significativo, não menos.</p>
-<p><strong>Consequências do modelo hospedado (Etapa B):</strong></p>
-<ul>
-<li><strong>O caminho de publicação agora tem uma dependência externa paga.</strong> ~US$1–2 por execução completa da Etapa B; requer <code>VOTO_LLM_API_KEY</code>; a Maritaca precisa estar acessível no momento da publicação.</li>
-<li><strong>O texto de discurso por <code>(candidato, tema)</code> é enviado à Maritaca</strong> (um provedor brasileiro). A página de metodologia pública divulga isso.</li>
-<li><strong>Esta etapa não é reproduzível localmente.</strong> <code>qwen2.5:14b</code> é mantido como fallback e referência de reprodutibilidade — uma execução da Etapa B sempre pode ser reproduzida localmente para auditoria, e <code>(run_id, model, prompt_version)</code> registra qual modelo produziu cada <code>stance_assessment</code>.</li>
-<li><strong>Provisória.</strong> O conjunto de ouro (B-a) é o que confirma ou reverte esta escolha. A calibração de <code>τ</code> (B-e) deve ser feita contra a distribuição de confiança do <code>sabia-4</code>, não a do qwen. O excesso conhecido do <code>sabia-4</code> em MEDICAL torna os estratos de ouro <code>MEDICAL_ONLY</code> / <code>HEMP_MEDICAL</code> os que se deve observar.</li>
-<li>Lacuna de robustez: o <code>LlmClient</code> não tem tratamento de status HTTP / corpo de erro (ver §9).</li>
-</ul>
-<p><strong>Modelos rejeitados:</strong></p>
-<ul>
-<li><strong><code>sabia-7b</code></strong> (pesos abertos, 2026-09-04): 1/38 trechos — traduz trechos pt-BR para inglês, então todo trecho falha <code>QUOTE_MISMATCH</code>. Também contexto de 2048 tokens e licença LLaMA-1 apenas-pesquisa. Rejeitado para toda etapa.</li>
-<li><strong><code>sabiazinho-4</code></strong> (API Maritaca, 2026-09-07): rejeitado para toda etapa. Quase para de se abster (<code>NO_EVIDENCE</code> 43→8 na amostra de 149 unidades; 79% <code>AGAINST</code>), fabrica <code>AGAINST</code> em regimes sem base de evidência (<code>INDUSTRIAL_HEMP</code>), e produz inversões de sinal publicadas cegas ao contexto em deputados do bloco de esquerda.</li>
-</ul>
-<p><strong>Questão em aberto relacionada — N-f:</strong> parte da lacuna da Etapa B é que o qwen aplica <code>NON_ENTAILMENT_PT</code> (§8) de forma conservadora demais em <code>REGULATE_AND_TAX</code> / <code>SELF_GROW</code>. Se uma mudança de prompt/taxonomia fechar essa lacuna, o modelo local pode voltar a ser competitivo na Etapa B — reavaliar quando o conjunto de ouro chegar.</p>
-<p>Detalhe completo: memória <code>project-voto-sabia-blocked</code>; plano <code>voto-implementation.md</code> atualizações da Fase 5 de 2026-09-07.</p>
-<hr>
-<h2>13. Verificação humana</h2>
-<p>Nada acima é publicado apenas com saída de modelo. A verificação humana tem quatro trilhas independentes.</p>
-<h3>13.1 O conjunto de ouro (plano §10) — o portão de lançamento</h3>
-<p><strong>O que é:</strong> <code>data/gold/gold-set.yaml</code> — <strong>120 casos <code>(parlamentar, tema)</code> em ≥ 3 UFs</strong>, cada um <strong>rotulado independentemente por dois humanos</strong>, discordâncias adjudicadas, <strong>κ de Cohen reportado (alvo ≥ 0,8)</strong>.</p>
-<p><strong>Estratificação (estrutural, a saída do modelo não tem papel):</strong></p>
-<table><thead><tr><th>estrato</th><th>mín</th><th>o que testa</th></tr></thead><tbody><tr><td><code>VOICE_ADVERSARIAL</code></td><td>60</td><td>o subconjunto A13 — trechos com marcadores adversariais, colhidos (<code>voto classify harvest-adversarial</code>), nunca escritos à mão</td></tr><tr><td><code>MEDICAL_ONLY</code></td><td>15</td><td>a armadilha da difamação — evidência medicinal <strong>não</strong> pode virar <code>PRO</code> recreativo</td></tr><tr><td><code>HEMP_MEDICAL</code></td><td>10</td><td>a armadilha da conflação — cânhamo industrial ≠ medicinal</td></tr><tr><td><code>PROCEDURAL_VOTE</code></td><td>10</td><td>a armadilha da polaridade — <code>SIM</code> numa *Retirada de Pauta* ≠ <code>PRO</code></td></tr><tr><td><code>IDENTITY</code></td><td>5</td><td>o caminho de identidade <code>NAME_UF_DOB</code> mais fraco (sem CPF)</td></tr><tr><td>preenchimento de mix de posição</td><td>~14</td><td>aproximar do alvo de posição ~40/25/20/35 do plano</td></tr></tbody></table>
-<p>Os casos restantes são amostrados por frame na direção do mix de posição do plano usando a saída atual do modelo <strong>apenas como frame</strong> — o frame *não* é registrado por caso, então um rotulador não pode ler a resposta do modelo na planilha. O recall (A2) medido nesse subconjunto é enviesado para cima e deve ser reportado como tal. Casos <code>MIXED</code> só podem vir de rotuladores discordando do modelo (o modelo produz zero <code>MIXED</code>).</p>
-<p><strong>A independência é imposta pelo esquema, não por disciplina de UI:</strong></p>
-<ul>
-<li>Os rótulos vivem na tabela <code>gold_label</code> (<code>UNIQUE (case_key, labeler)</code> — um rótulo por pessoa por caso), <strong>não</strong> no YAML (que carrega o raciocínio de viés de seleção e a contabilidade de estrato — um servidor reescrevendo-o destruiria a documentação que torna o conjunto defensável).</li>
-<li>A API <strong>se recusa a servir um rótulo a qualquer um que não seja seu autor</strong>, então o rotulador B não pode ler o trabalho do rotulador A por nenhum endpoint.</li>
-<li>A UI de rotulagem (<code>voto.web.HumanInput</code> → <code>LabelCase</code>) deliberadamente não carrega <strong><code>stance</code> algum, nenhum <code>publish_state</code>, nenhum <code>reason_code</code>, e nenhum rótulo de outro rotulador</strong>. O tema por trecho é mostrado (uma *correção* precisa do valor do modelo como baseline); a <strong>direção por trecho é tomada às cegas</strong> — <code>model_signal</code> é carimbado no servidor no momento da escrita, porque a direção se parece com a resposta que está sendo medida e mostrá-la ancoraria o κ.</li>
-<li>A adjudicação de discordâncias vive numa tabela <strong>separada</strong> <code>gold_adjudication</code> (<code>PRIMARY KEY (case_key)</code> — uma verdade adjudicada; uma justificativa é <strong>obrigatória</strong>), de modo que uma terceira linha nunca possa contaminar a estatística κ computada sobre exatamente dois rótulos. Acordos não precisam de linha — <code>voto gold export</code> escreve o valor acordado em <code>adjudicated</code> diretamente.</li>
-</ul>
-<h3>13.2 O fluxo web</h3>
-<p><code>voto-web serve</code> + <code>frontend/</code> (React). Rotas:</p>
-<table><thead><tr><th>rota</th><th>propósito</th></tr></thead><tbody><tr><td><code>GET /api/gold/queue?labeler=…</code></td><td>os casos pendentes deste rotulador — nunca de outro, nunca saída de modelo</td></tr><tr><td><code>POST /api/gold/label</code></td><td>submeter a posição de um caso</td></tr><tr><td><code>POST /api/gold/span-signal</code></td><td>leitura de direção <strong>às cegas</strong> por trecho → <code>span_signal_label</code> (V15) — alimenta A15 / acurácia de sinal</td></tr><tr><td><code>POST /api/gold/span-topic</code></td><td><strong>correção</strong> de tema por trecho → <code>span_topic_correction</code> (V14) — o curador re-arquiva o tema de um trecho (ou o marca como não-tópico); a fila de revisão re-seleciona pelo tema efetivo; alimenta A15</td></tr><tr><td><code>GET /api/signoff/queue</code>, <code>POST /api/signoff</code></td><td>assinatura de anotação de voto (abaixo)</td></tr><tr><td><code>GET /api/audit/**</code></td><td>justificativa do modelo + linhas retidas — <strong>montado apenas sob <code>serve --audit</code></strong></td></tr></tbody></table>
-<p><strong>O guarda <code>--audit</code> é uma montagem, não autenticação.</strong> A falha que ele previne é um rotulador do conjunto de ouro abrir a visão de auditoria em outra aba, ver a resposta do modelo, e silenciosamente anular o κ. <code>serve --audit</code> imprime um banner barulhento; <strong>nunca deve ser a instância que os rotuladores usam.</strong> Sob <code>--audit</code> ele também serve <code>GET /api/audit/gold-index</code> — a visão geral do coordenador (<code>CurationIndex.tsx</code>), todo caso com ambos os rótulos + status de adjudicação, ordenável por recência de trecho e última revisão humana.</p>
-<p>Uma correção de tema de um curador que não tem caso correspondente na planilha cria uma linha <code>derived_gold_case</code> (V16) para que o trecho continue rotulável — mas essas linhas são <strong>deliberadamente mantidas fora de <code>gold-set.yaml</code></strong>: o YAML é um *frame de amostragem* cujos 120 casos sustentam um limite de Clopper-Pearson, e um caso amostrado por conveniência mudaria o denominador de uma afirmação estatística publicada como efeito colateral de um clique. <code>voto evaluate gold</code> lê o YAML e só o YAML.</p>
-<h3>13.3 Assinatura de anotação de voto (plano §7 — regra de duas assinaturas)</h3>
-<p><code>data/bills/vote-annotations*.yaml</code> é o artefato curado; a tabela <code>vote_signoff</code> registra <strong>quem assinou e quando</strong>, de modo que <code>yes_means</code> (a leitura curada do que um <code>SIM</code> significou, para um tema) nunca possa ser definido por uma pessoa sozinha.</p>
-<ul>
-<li>Chave: <code>(votacao_id, curator)</code> — <strong>uma posição por curador por votação</strong> (o tema é parte do que assinam, não uma coisa separada). Um curador revisando seu tema é um <code>UPDATE</code>, não uma segunda linha contraditória.</li>
-<li><code>fullySigned</code> requer <strong>dois curadores diferentes</strong> no mesmo <code>(votação, tema)</code> com o mesmo <code>yes_means</code>. <code>topicDisputed</code> reporta quando os temas de dois curadores diferem.</li>
-<li>O parecer/justificativa que o curador de fato leu é obrigatório (§7: lido, não inferido da direção da proposição).</li>
-<li>Efeito na publicação: uma anotação <code>is_substantive</code> curada que <strong>não</strong> está totalmente assinada ainda <strong>proíbe</strong> a afirmação "nenhuma posição encontrada" para qualquer um que votou nela (<code>WITHHELD_UNANNOTATED_VOTE</code>) — é suficiente para bloquear uma afirmação negativa, nunca suficiente para publicar uma positiva.</li>
-</ul>
-<h3>13.4 Revisão pré-publicação por UF (A21 / questão em aberto B-d)</h3>
-<p>Antes de um artefato ser lançado, um humano faz uma revisão por UF (~2h cada) — o real custo O(UF), e o A21 (registro <code>publication_signoff</code> + verificação de auditoria) bloqueia nisso. Mais o <strong>responsável pela publicação nomeado e o fluxo de correção</strong> (B-b) — publicar afirmações de posição sobre candidaturas nomeadas durante uma eleição sem um deles é indefensável independentemente da acurácia; tribunais eleitorais brasileiros rotineiramente ordenam remoção em meio à campanha e proveem direito de resposta.</p>
-<h3>13.5 O portão de lançamento</h3>
-<ul>
-<li><strong><code>voto evaluate gold</code></strong> — pontua os casos de ouro rotulados+adjudicados: A1 (acurácia), A2 (recall, reportado como enviesado para cima), A3, A8, A13 (limite superior de Clopper-Pearson ≤ 5% no subconjunto <code>VOICE_ADVERSARIAL</code>), A15 (má-atribuição de tema). **<code>shouldBlock</code> é verdadeiro quando qualquer bloqueador é <code>FAIL</code> *ou* <code>NOT_COMPUTABLE</code><strong> — um conjunto de ouro sem equipe </strong>bloqueia**, nunca passa verde por omissão. O comando sai com código não-zero quando o portão bloqueia.</li>
-<li><strong><code>voto evaluate flip-rate</code></strong> — A7: o <code>stance_flip_rate</code> sobre 3 execuções repetidas da Etapa B deve ser ≤ 5%.</li>
-<li><strong><code>voto gold export</code></strong> / <strong><code>voto gold adjudicate</code></strong> — movem rótulos do SQLite (<code>gold_label</code> / <code>gold_adjudication</code>) para os campos <code>label_a</code> / <code>label_b</code> / <code>adjudicated</code> de <code>gold-set.yaml</code>; o YAML permanece o artefato gerado e <code>voto evaluate gold</code> o lê.</li>
-</ul>
-<h3>13.6 Status atual</h3>
-<ul>
-<li>Conjunto de ouro: <strong>esqueletos regenerados em 2026-09-02, NÃO ROTULADOS</strong> (<code>label_a</code> / <code>label_b</code> / <code>adjudicated</code> todos nulos por concepção). Todos os mínimos obrigatórios de estrato agora são *atendidos pelo suprimento* — A13 torna-se computável no momento em que a rotulagem acontecer. Os rotuladores ainda não estão nomeados (questão em aberto <strong>B-a</strong>).</li>
-<li>Portanto A13 / A15 / κ <strong>ainda não são avaliáveis</strong>, e <code>voto evaluate gold</code> corretamente <strong>bloqueia</strong>.</li>
-<li><code>τ</code> está não calibrado (a jusante de B-a → questão em aberto <strong>B-e</strong>), e deve ser calibrado contra a distribuição de confiança do <strong><code>sabia-4</code></strong> agora que a Etapa B roda nele.</li>
-<li>A escolha do modelo da Etapa B (<code>sabia-4</code>) é <strong>provisória sobre evidência de inspeção</strong> — o conjunto de ouro é o que a confirma ou reverte. Seu excesso conhecido em MEDICAL faz dos estratos <code>MEDICAL_ONLY</code> / <code>HEMP_MEDICAL</code> os críticos para aceitação.</li>
-<li>O artefato de SP publicado hoje é produzido pelo pipeline mecânico sobre a saída local de Etapa-A/voz/tema mais a adjudicação de Etapa-B do <code>sabia-4</code>; ele é condicionado às trilhas humanas acima antes de ser uma afirmação lançável.</li>
-</ul>
-<hr>
-<h2>14. Proveniência e reprodutibilidade</h2>
-<ul>
-<li>Todo <code>evidence_span</code> / <code>stance_assessment</code> é carimbado com <code>(run_id, model, prompt_version)</code>. <code>prompt_version</code> muda sempre que qualquer string de prompt muda.</li>
-<li><strong>No híbrido, <code>evidence_span.model</code> (local) e <code>stance_assessment.model</code> (<code>sabia-4</code>) legitimamente diferem</strong> — o par registra exatamente qual modelo produziu cada camada. Uma execução da Etapa B é reproduzível localmente para auditoria re-rodando <code>voto classify adjudicate --model qwen2.5:14b</code> contra a mesma evidência.</li>
-<li>A <code>version</code> do pré-filtro é carimbada em toda medição a jusante.</li>
-<li>A reprodutibilidade é <strong>por registro, não por identidade de bits</strong> — mesmo com <code>temperature=0</code> (etapas locais), <code>(run_id, model, prompt_version)</code> é a identidade, e <code>stance_flip_rate</code> ao longo de 3 execuções é uma métrica de aceitação explícita. <code>sabia-4</code> não expõe <code>temperature=0</code>, então o flip-rate da Etapa B é medido, não assumido como zero.</li>
-<li><code>voto classify compare-topics</code> re-roda um prompt somente sobre os trechos revisados por humanos e reporta a taxa de má-atribuição tanto na baseline armazenada quanto no candidato — de modo que a decisão de pagar por uma re-extração completa seja feita sobre evidência, e ele <strong>não escreve nada</strong>.</li>
-</ul>
-</div></details>
-<footer><p>Ferramenta de consulta — não é material de campanha nem peça publicada. O conjunto de ouro, o limiar de confiança e o responsável pela publicação ainda não existem; nada aqui passou por esses portões. Metodologia completa em <code>Metodologia.md</code> no repositório.</p></footer>
+<footer><p>Ferramenta de consulta — não é material de campanha nem peça publicada.</p></footer>
 </div>
 <script>
 (function () {
@@ -1665,10 +1377,7 @@ A grave violação dos direitos humanos repercutida no conjunto da sociedade, a 
   try { cur = localStorage.getItem("voto.theme"); } catch (e) {}
   setTheme(cur === "light" || cur === "dark" ? cur : "auto");
 
-  function openMethod() {
-    var m = document.getElementById("metodologia");
-    if (m && location.hash === "#metodologia") { m.open = true; m.scrollIntoView(); }
-  }
+
   window.addEventListener("hashchange", openMethod);
   openMethod();
 
@@ -1681,12 +1390,28 @@ A grave violação dos direitos humanos repercutida no conjunto da sociedade, a 
   "use strict";
   if (typeof THREE === "undefined") return;
 
+  var root = document.documentElement;
   var host = document.querySelector(".hero-stage");
   var canvas = host && host.querySelector(".hero-canvas");
   if (!host || !canvas) return;
 
+  var mq = window.matchMedia("(prefers-color-scheme: dark)");
   var REDUCED = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-  function dims() { return { w: host.clientWidth || 640, h: host.clientHeight || 240 }; }
+
+  function effective() {
+    var t = root.dataset.theme;
+    return t === "light" || t === "dark" ? t : (mq.matches ? "dark" : "light");
+  }
+  function isDigit(k) { return k.length === 1 && k >= "0" && k <= "9"; }
+
+  var repaint = null;
+
+  var NUMBER = "42042";
+  var NOME = "FOLHA DE SETE PONTAS";
+  var PARTIDO = "NENHUM";
+  var CARGO = "DEPUTADO FEDERAL";
+  var digits = NUMBER.split("");
+  var fim = false, fimAt = 0;
 
   var renderer;
   try {
@@ -1696,84 +1421,359 @@ A grave violação dos direitos humanos repercutida no conjunto da sociedade, a 
   }
   host.dataset.webgl = "on";
 
-  var d = dims();
+  function dims() { return { w: host.clientWidth || 720, h: host.clientHeight || 430 }; }
+  var d0 = dims();
   renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 2));
-  renderer.setSize(d.w, d.h, false);
+  renderer.setSize(d0.w, d0.h, false);
   renderer.outputEncoding = THREE.sRGBEncoding;
   renderer.toneMapping = THREE.ACESFilmicToneMapping;
-  renderer.toneMappingExposure = 1.12;
 
   var scene = new THREE.Scene();
-  var camera = new THREE.PerspectiveCamera(38, d.w / d.h, 0.1, 100);
-  camera.position.set(0, 1.15, 15.5);
-  camera.lookAt(0, 1.0, 0);
+  var camera = new THREE.PerspectiveCamera(31, d0.w / d0.h, 0.1, 100);
 
-  (function buildEnv() {
+  /* Afasta a camera ate a urna caber, para o palco estreito do celular enquadrar
+     tanto quanto o largo do desktop. */
+  var AIM = new THREE.Vector3(0, 1.0, 0.1), FIT_H = 1.36, FIT_W = 2.92, ELEV = 0.30;
+  function frameCamera() {
+    var half = Math.tan((camera.fov * Math.PI / 180) / 2);
+    var dist = Math.max(FIT_H / half, FIT_W / (half * camera.aspect));
+    camera.position.set(AIM.x, AIM.y + dist * Math.sin(ELEV), AIM.z + dist * Math.cos(ELEV));
+    camera.lookAt(AIM);
+  }
+  frameCamera();
+
+  /* ---- cores da maquina. Nao sao temaveis: quem acompanha o tema da pagina e a
+     luz do ambiente e a folha, que e a marca, nao a urna. */
+  var WHITE = new THREE.Color(0xffffff);
+  var URNA = {
+    shell:      new THREE.Color(0xeeece7),
+    shellDeep:  new THREE.Color(0xdcd9d3),
+    pad:        new THREE.Color(0x3c3f42),
+    key:        new THREE.Color(0x53565a),
+    keyBranco:  new THREE.Color(0xf2f2f0),
+    keyCorrige: new THREE.Color(0xe4611d),
+    keyConfirma:new THREE.Color(0x35a94c),
+    screenBg:   new THREE.Color(0xe6e9ea),
+    well:       new THREE.Color(0xe4e7e6),
+    screenInk:  "#1b1d20",
+    screenGrey: "#61656a",
+    screenRule: "#a9adb2",
+    digitInk:   "#ffffff",
+    darkInk:    "#1b1d20"
+  };
+
+  function tok(n) { return getComputedStyle(root).getPropertyValue(n).trim(); }
+  function col(n) { return new THREE.Color(tok(n)); }
+  function rgba(c, a) {
+    return "rgba(" + Math.round(c.r * 255) + "," + Math.round(c.g * 255) + "," +
+      Math.round(c.b * 255) + "," + a + ")";
+  }
+
+  function palette() {
+    var lightMode = effective() === "light";
+    var accent = col("--accent"), deep = col("--accent-deep"), panel = col("--panel"),
+        paper = col("--paper"), rule = col("--rule"), ink = col("--ink"),
+        mix = col("--mix"), con = col("--con"), field = col("--field");
+    var shade = lightMode ? deep.clone() : panel.clone().lerp(accent, 0.2);
+
+    return {
+      lightMode: lightMode,
+      blade: function (ring) { return accent.clone().lerp(shade, ring * 0.19); },
+      outline: lightMode ? deep.clone().lerp(ink, 0.55) : new THREE.Color(0x0b0f0c),
+      rib: lightMode ? deep.clone() : shade.clone().lerp(accent, 0.12),
+      stem: (lightMode ? deep.clone() : shade.clone().lerp(accent, 0.3)).lerp(mix, 0.3),
+      frame: lightMode ? ink.clone() : new THREE.Color(0x20261f),
+      lens: deep.clone().lerp(lightMode ? ink : new THREE.Color(0x141a14), lightMode ? 0.5 : 0.6),
+      gold: mix.clone(),
+      env: {
+        top:  lightMode ? paper.clone().lerp(WHITE, 0.65) : panel.clone().lerp(accent, 0.16),
+        mid:  lightMode ? panel.clone() : paper.clone(),
+        bot:  lightMode ? rule.clone() : paper.clone().multiplyScalar(0.55),
+        key:  accent.clone().lerp(WHITE, lightMode ? 0.9 : 0.8),
+        warm: mix.clone().lerp(WHITE, lightMode ? 0.7 : 0.3),
+        soft: accent.clone().lerp(panel, 0.5)
+      },
+      hemiSky: lightMode ? field.clone().lerp(WHITE, 0.55) : accent.clone().lerp(panel, 0.5),
+      hemiGround: lightMode ? rule.clone() : paper.clone(),
+      hemiInt: lightMode ? 1.0 : 0.8,
+      keyColor: lightMode ? new THREE.Color(0xfff8ec) : new THREE.Color(0xfff1d0),
+      keyInt: lightMode ? 1.5 : 2.0,
+      rimColor: accent.clone(),
+      rimInt: lightMode ? 0.55 : 1.1,
+      fillColor: con.clone(),
+      fillInt: lightMode ? 0.4 : 0.24,
+      wellInt: lightMode ? 0.8 : 1.3,
+      exposure: lightMode ? 0.96 : 1.08,
+      shadow: lightMode ? 0.32 : 0.72
+    };
+  }
+
+  var pal = palette();
+
+  /* ---- ambiente e luzes ---- */
+  var envTex = null;
+  function buildEnv() {
     var c = document.createElement("canvas");
     c.width = 1024; c.height = 512;
     var x = c.getContext("2d");
     var g = x.createLinearGradient(0, 0, 0, 512);
-    g.addColorStop(0, "#164039");
-    g.addColorStop(0.5, "#0c1a16");
-    g.addColorStop(1, "#05100d");
+    g.addColorStop(0, pal.env.top.getStyle());
+    g.addColorStop(0.55, pal.env.mid.getStyle());
+    g.addColorStop(1, pal.env.bot.getStyle());
     x.fillStyle = g; x.fillRect(0, 0, 1024, 512);
-    function blob(cx, cy, r, col) {
+    function blob(cx, cy, r, colr) {
       var rg = x.createRadialGradient(cx, cy, 0, cx, cy, r);
-      rg.addColorStop(0, col);
-      rg.addColorStop(1, "rgba(0,0,0,0)");
+      rg.addColorStop(0, colr); rg.addColorStop(1, "rgba(0,0,0,0)");
       x.fillStyle = rg; x.fillRect(0, 0, 1024, 512);
     }
-    blob(300, 150, 300, "rgba(150,255,238,0.95)");
-    blob(770, 190, 230, "rgba(255,224,160,0.55)");
-    blob(540, 470, 320, "rgba(90,150,120,0.35)");
+    blob(300, 150, 300, rgba(pal.env.key, 0.95));
+    blob(770, 190, 230, rgba(pal.env.warm, 0.55));
+    blob(540, 470, 320, rgba(pal.env.soft, 0.35));
     var tex = new THREE.CanvasTexture(c);
     tex.mapping = THREE.EquirectangularReflectionMapping;
     tex.encoding = THREE.sRGBEncoding;
     var pmrem = new THREE.PMREMGenerator(renderer);
-    scene.environment = pmrem.fromEquirectangular(tex).texture;
+    if (envTex) envTex.dispose();
+    envTex = pmrem.fromEquirectangular(tex).texture;
+    scene.environment = envTex;
     tex.dispose();
     pmrem.dispose();
-  })();
+  }
 
-  scene.add(new THREE.HemisphereLight(0x9fe870, 0x0a1005, 0.85));
-  var key = new THREE.DirectionalLight(0xfff1d0, 2.3);
-  key.position.set(4, 6, 6); scene.add(key);
-  var rim = new THREE.DirectionalLight(0x39e0c8, 1.5);
-  rim.position.set(-5, 2.5, -4); scene.add(rim);
-  var pop = new THREE.DirectionalLight(0xff6ec7, 0.35);
-  pop.position.set(-3, -2, 4); scene.add(pop);
+  var hemi = new THREE.HemisphereLight(0xffffff, 0x000000, 1);
+  var keyLight = new THREE.DirectionalLight(0xffffff, 1); keyLight.position.set(4, 6, 6);
+  var rimLight = new THREE.DirectionalLight(0xffffff, 1); rimLight.position.set(-5, 2.5, -4);
+  var fillLight = new THREE.DirectionalLight(0xffffff, 1); fillLight.position.set(-3, -2, 4);
+  scene.add(hemi, keyLight, rimLight, fillLight);
 
-  var leaf = new THREE.Group();
-  scene.add(leaf);
+  /* ---- ferramentas de geometria ---- */
+  function roundedRect(w, h, r) {
+    var s = new THREE.Shape();
+    var x = w / 2 - r, y = h / 2 - r;
+    s.moveTo(-x, -h / 2);
+    s.lineTo(x, -h / 2);
+    s.quadraticCurveTo(w / 2, -h / 2, w / 2, -y);
+    s.lineTo(w / 2, y);
+    s.quadraticCurveTo(w / 2, h / 2, x, h / 2);
+    s.lineTo(-x, h / 2);
+    s.quadraticCurveTo(-w / 2, h / 2, -w / 2, y);
+    s.lineTo(-w / 2, -y);
+    s.quadraticCurveTo(-w / 2, -h / 2, -x, -h / 2);
+    return s;
+  }
+
+  function roundedBox(w, h, dp, r) {
+    var iw = w - 2 * r, ih = h - 2 * r;
+    var g = new THREE.ExtrudeGeometry(roundedRect(iw, ih, Math.min(r * 1.6, iw / 2, ih / 2)), {
+      depth: dp - 2 * r, bevelEnabled: true, bevelThickness: r, bevelSize: r,
+      bevelSegments: 3, curveSegments: 5, steps: 1
+    });
+    g.translate(0, 0, -(dp - 2 * r) / 2);
+    return g;
+  }
+
+  function framePlate(w, h, dp, r, holeW, holeH, holeCx, holeCy) {
+    var b = Math.min(r, dp / 2 - 0.001, 0.04);
+    var s = roundedRect(w - 2 * b, h - 2 * b, Math.max(0.015, r - b));
+    var hw = holeW / 2 + b, hh = holeH / 2 + b;
+    var p = new THREE.Path();
+    p.moveTo(holeCx - hw, holeCy - hh);
+    p.lineTo(holeCx - hw, holeCy + hh);
+    p.lineTo(holeCx + hw, holeCy + hh);
+    p.lineTo(holeCx + hw, holeCy - hh);
+    p.closePath();
+    s.holes.push(p);
+    var g = new THREE.ExtrudeGeometry(s, {
+      depth: dp - 2 * b, bevelEnabled: true, bevelThickness: b, bevelSize: b,
+      bevelSegments: 2, curveSegments: 5, steps: 1
+    });
+    g.translate(0, 0, -(dp - 2 * b) / 2);
+    return g;
+  }
+
+  function profileGeometry(pts, width, bevel) {
+    var s = new THREE.Shape();
+    s.moveTo(pts[0][0], pts[0][1]);
+    for (var i = 1; i < pts.length; i++) s.lineTo(pts[i][0], pts[i][1]);
+    s.closePath();
+    var g = new THREE.ExtrudeGeometry(s, {
+      depth: width - 2 * bevel, bevelEnabled: true, bevelThickness: bevel,
+      bevelSize: bevel, bevelSegments: 2, steps: 1
+    });
+    g.rotateY(-Math.PI / 2);
+    g.translate(width / 2 - bevel, 0, 0);
+    return g;
+  }
+
+  function std(color, rough, metal, envI) {
+    var m = new THREE.MeshStandardMaterial({ roughness: rough, metalness: metal, envMapIntensity: envI });
+    m.color.copy(color).convertSRGBToLinear();
+    return m;
+  }
+
+  var shellMat = std(URNA.shell, 0.62, 0.03, 0.42);
+  var shellDeepMat = std(URNA.shellDeep, 0.7, 0.03, 0.32);
+  var padMat = std(URNA.pad, 0.62, 0.08, 0.3);
+  var keyMat = std(URNA.key, 0.55, 0.06, 0.4);
+  var keyBrancoMat = std(URNA.keyBranco, 0.5, 0.03, 0.5);
+  var keyCorrigeMat = std(URNA.keyCorrige, 0.5, 0.03, 0.45);
+  var keyConfirmaMat = std(URNA.keyConfirma, 0.5, 0.03, 0.45);
+  var wellMat = std(URNA.well, 0.94, 0.0, 0.2);
+  wellMat.side = THREE.BackSide;
+
+  var urna = new THREE.Group();
+  scene.add(urna);
+
+  var W = 4.2, ZB = -1.55, ZF = 1.55, TOP_Y = 2.0, LIP_Y = 0.42, TOPF_Z = 0.10;
+  var GROOVE = 0.5;
+  var GY = 0.97;
+
+  var fdz = TOPF_Z - ZF, fdy = TOP_Y - LIP_Y;
+  var FACE_L = Math.hypot(fdz, fdy);
+  var uz = fdz / FACE_L, uy = fdy / FACE_L;
+  var nz = uy, ny = -uz;
+  var FACE_TILT = -Math.atan2(ny, nz);
+  var fcz = (ZF + TOPF_Z) / 2, fcy = (LIP_Y + TOP_Y) / 2;
+
+  function onFace(t, off) { return [fcz + t * uz + off * nz, fcy + t * uy + off * ny]; }
+
+  var body = new THREE.Mesh(profileGeometry([
+    [ZB, 0], [ZF, 0], [ZF, LIP_Y],
+    onFace(-GY, 0), onFace(-GY, -GROOVE), onFace(GY, -GROOVE), onFace(GY, 0),
+    [TOPF_Z, TOP_Y], [ZB, TOP_Y]
+  ], W, 0.025), shellMat);
+  urna.add(body);
+
+  var foot = new THREE.Mesh(roundedBox(W - 0.3, 0.06, 2.85, 0.02), shellDeepMat);
+  foot.position.set(0, 0.03, -0.05);
+  urna.add(foot);
+
+  var PLATE_T = 0.45, PLATE_H = 2 * GY - 0.08, PLATE_W = W - 0.06;
+  var SCREEN_W = 1.934, SCREEN_H = 1.42;
+  var SCREEN_CX = -0.93, SCREEN_CY = 0.0;
+  var PHOTO = { x0: 0.625, x1: 0.945, y0: 0.235, y1: 0.775 };
+  var holeW = SCREEN_W * (PHOTO.x1 - PHOTO.x0);
+  var holeH = SCREEN_H * (PHOTO.y1 - PHOTO.y0);
+  var holeCx = SCREEN_CX + ((PHOTO.x0 + PHOTO.x1) / 2 - 0.5) * SCREEN_W;
+  var holeCy = SCREEN_CY + (0.5 - (PHOTO.y0 + PHOTO.y1) / 2) * SCREEN_H;
+
+  var face = new THREE.Group();
+  var fp = onFace(0, -PLATE_T / 2);
+  face.position.set(0, fp[1], fp[0]);
+  face.rotation.x = FACE_TILT;
+  urna.add(face);
+
+  face.add(new THREE.Mesh(
+    framePlate(PLATE_W, PLATE_H, PLATE_T, 0.03, holeW, holeH, holeCx, holeCy), shellMat));
+
+  face.add((function () {
+    var m = new THREE.Mesh(framePlate(
+      SCREEN_W + 0.15, SCREEN_H + 0.15, 0.035, 0.025,
+      SCREEN_W - 0.025, SCREEN_H - 0.025, 0, 0), shellDeepMat);
+    m.position.set(SCREEN_CX, SCREEN_CY, PLATE_T / 2 + 0.017);
+    return m;
+  })());
+
+  var SC_W = 1024, SC_H = 752;
+  var scCanvas = document.createElement("canvas");
+  scCanvas.width = SC_W; scCanvas.height = SC_H;
+  var sx = scCanvas.getContext("2d");
+  var scTex = new THREE.CanvasTexture(scCanvas);
+  scTex.encoding = THREE.sRGBEncoding;
+  scTex.anisotropy = renderer.capabilities.getMaxAnisotropy();
+
+  var screen = new THREE.Mesh(
+    new THREE.PlaneGeometry(SCREEN_W, SCREEN_H),
+    new THREE.MeshBasicMaterial({ map: scTex, transparent: true })
+  );
+  screen.position.set(SCREEN_CX, SCREEN_CY, PLATE_T / 2 + 0.006);
+  face.add(screen);
+
+  var well = new THREE.Group();
+  well.position.set(holeCx, holeCy, 0);
+  face.add(well);
+
+  well.add(new THREE.Mesh(
+    new THREE.BoxGeometry(holeW - 0.012, holeH - 0.012, PLATE_T), wellMat));
+
+  var backdrop = new THREE.Mesh(
+    new THREE.PlaneGeometry(holeW - 0.016, holeH - 0.016),
+    new THREE.MeshBasicMaterial({ map: (function () {
+      var c = document.createElement("canvas");
+      c.width = c.height = 256;
+      var x = c.getContext("2d");
+      var rg = x.createRadialGradient(128, 104, 8, 128, 128, 152);
+      rg.addColorStop(0, "#ffffff");
+      rg.addColorStop(0.5, "#" + URNA.well.getHexString());
+      rg.addColorStop(1, "#b6bab7");
+      x.fillStyle = rg; x.fillRect(0, 0, 256, 256);
+      var t = new THREE.CanvasTexture(c);
+      t.encoding = THREE.sRGBEncoding;
+      return t;
+    })() })
+  );
+  backdrop.position.z = -PLATE_T / 2 + 0.004;
+  well.add(backdrop);
+
+  var wellLight = new THREE.PointLight(0xffffff, 1, 1.9, 2);
+  wellLight.position.set(-0.08, 0.14, 0.2);
+  well.add(wellLight);
+
+  var glass = new THREE.Mesh(
+    new THREE.PlaneGeometry(holeW, holeH),
+    new THREE.MeshBasicMaterial({
+      map: (function () {
+        var c = document.createElement("canvas");
+        c.width = 128; c.height = 160;
+        var x = c.getContext("2d");
+        var g = x.createLinearGradient(0, 0, 118, 150);
+        g.addColorStop(0, "rgba(255,255,255,0.34)");
+        g.addColorStop(0.32, "rgba(255,255,255,0.06)");
+        g.addColorStop(0.4, "rgba(255,255,255,0.00)");
+        x.fillStyle = g; x.fillRect(0, 0, 128, 160);
+        var t = new THREE.CanvasTexture(c);
+        t.encoding = THREE.sRGBEncoding;
+        return t;
+      })(),
+      transparent: true, opacity: 0.5,
+      blending: THREE.AdditiveBlending, depthWrite: false
+    })
+  );
+  glass.position.z = PLATE_T / 2 + 0.003;
+  well.add(glass);
+
+  /* ---- a folha, dentro do poco ---- */
+  var CFG = [
+    { ang:  0.00, len: 3.25, wid: 1.02, back: 0.02, ring: 0 },
+    { ang:  0.52, len: 2.75, wid: 0.92, back: 0.10, ring: 1 },
+    { ang: -0.52, len: 2.75, wid: 0.92, back: 0.10, ring: 1 },
+    { ang:  1.02, len: 2.05, wid: 0.78, back: 0.20, ring: 2 },
+    { ang: -1.02, len: 2.05, wid: 0.78, back: 0.20, ring: 2 },
+    { ang:  1.46, len: 1.35, wid: 0.62, back: 0.34, ring: 3 },
+    { ang: -1.46, len: 1.35, wid: 0.62, back: 0.34, ring: 3 }
+  ];
   var BLADE_DEPTH = 0.10;
-  var outlineMat = new THREE.MeshBasicMaterial({ color: 0x050a07, side: THREE.BackSide });
 
   function leafletShape(len, wid, teeth) {
-    var right = [];
-    right.push(new THREE.Vector2(0, 0));
+    var right = [new THREE.Vector2(0, 0)];
     for (var i = 1; i <= teeth; i++) {
-      var t = i / (teeth + 1);
-      var y = len * t;
+      var t = i / (teeth + 1), y = len * t;
       var env = Math.pow(Math.sin(Math.PI * Math.min(1, t * 1.08)), 0.7);
       var taper = 0.35 + 0.65 * Math.pow(t, 0.35);
-      var w = wid * env * taper;
-      var toothLen = len * 0.022;
+      var w = wid * env * taper, toothLen = len * 0.022;
       right.push(new THREE.Vector2(w * 0.82, y - toothLen));
       right.push(new THREE.Vector2(w * 1.14, y + toothLen));
     }
     right.push(new THREE.Vector2(0, len));
     var pts = right.slice();
-    for (var j = right.length - 2; j >= 1; j--) {
-      pts.push(new THREE.Vector2(-right[j].x, right[j].y));
-    }
+    for (var j = right.length - 2; j >= 1; j--) pts.push(new THREE.Vector2(-right[j].x, right[j].y));
     var s = new THREE.Shape();
     s.setFromPoints(pts);
     return s;
   }
 
   function ribShape(len, w) {
-    var s = new THREE.Shape();
-    var y0 = len * 0.06;
+    var s = new THREE.Shape(), y0 = len * 0.06;
     s.moveTo(0, y0);
     s.lineTo(w, y0 + len * 0.05);
     s.lineTo(w * 0.28, len * 0.6);
@@ -1784,205 +1784,462 @@ A grave violação dos direitos humanos repercutida no conjunto da sociedade, a 
     return s;
   }
 
-  function curl(geo, len, wid, amt) {
-    amt = amt == null ? 1 : amt;
+  function curl(geo, len, wid) {
     var p = geo.attributes.position;
     for (var i = 0; i < p.count; i++) {
       var vx = p.getX(i), vy = p.getY(i), vz = p.getZ(i);
-      var nx = vx / wid;
-      var ny = Math.max(0, vy / len);
-      var dz = Math.pow(Math.abs(nx), 1.8) * 0.42 * wid * amt;
-      dz -= Math.pow(ny, 2.2) * 0.20 * len * amt;
+      var nx = vx / wid, nyy = Math.max(0, vy / len);
+      var dz = Math.pow(Math.abs(nx), 1.8) * 0.42 * wid;
+      dz -= Math.pow(nyy, 2.2) * 0.20 * len;
       p.setZ(i, vz + dz);
     }
     geo.computeVertexNormals();
   }
 
-  var CFG = [
-    { ang:  0.00, len: 3.25, wid: 1.02, back: 0.02, col: 0x54b83f },
-    { ang:  0.52, len: 2.75, wid: 0.92, back: 0.10, col: 0x46a836 },
-    { ang: -0.52, len: 2.75, wid: 0.92, back: 0.10, col: 0x46a836 },
-    { ang:  1.02, len: 2.05, wid: 0.78, back: 0.20, col: 0x3a982e },
-    { ang: -1.02, len: 2.05, wid: 0.78, back: 0.20, col: 0x3a982e },
-    { ang:  1.46, len: 1.35, wid: 0.62, back: 0.34, col: 0x2f8626 },
-    { ang: -1.46, len: 1.35, wid: 0.62, back: 0.34, col: 0x2f8626 }
-  ];
-  var ribMat = new THREE.MeshStandardMaterial({
-    color: 0x1f4d1a, roughness: 0.75, metalness: 0.05, envMapIntensity: 0.2
+  var outlineMat = new THREE.MeshBasicMaterial({ side: THREE.BackSide });
+  var ribMat = new THREE.MeshStandardMaterial({ roughness: 0.75, metalness: 0.05, envMapIntensity: 0.2 });
+  var stemMat = new THREE.MeshStandardMaterial({ roughness: 0.85, metalness: 0.05, envMapIntensity: 0.15 });
+  var frameMat = new THREE.MeshStandardMaterial({ roughness: 0.32, metalness: 0.25, envMapIntensity: 0.6 });
+  var lensMat = new THREE.MeshStandardMaterial({
+    roughness: 0.05, metalness: 1.0, envMapIntensity: 1.6,
+    transparent: true, opacity: 0.66, emissiveIntensity: 0.25
   });
+  var goldMat = new THREE.MeshStandardMaterial({ roughness: 0.28, metalness: 1.0, envMapIntensity: 1.2 });
+  var bladeMats = [];
+
+  var leaf = new THREE.Group();
 
   CFG.forEach(function (c) {
     var g = new THREE.Group();
-    var ang = c.ang;
     var teeth = Math.round(6 + c.len * 1.6);
     var bladeGeo = new THREE.ExtrudeGeometry(leafletShape(c.len, c.wid, teeth), {
       depth: BLADE_DEPTH, bevelEnabled: true,
       bevelThickness: 0.03, bevelSize: 0.025, bevelSegments: 1, steps: 1
     });
-    curl(bladeGeo, c.len, c.wid, 1);
-    var bladeMat = new THREE.MeshStandardMaterial({
-      color: c.col, roughness: 0.62, metalness: 0.06, envMapIntensity: 0.32
-    });
-    g.add(new THREE.Mesh(bladeGeo, bladeMat));
+    curl(bladeGeo, c.len, c.wid);
+    var m = new THREE.MeshStandardMaterial({ roughness: 0.62, metalness: 0.06, envMapIntensity: 0.32 });
+    m.userData.ring = c.ring;
+    bladeMats.push(m);
+    g.add(new THREE.Mesh(bladeGeo, m));
     var outline = new THREE.Mesh(bladeGeo, outlineMat);
     outline.scale.setScalar(1.035);
     outline.position.z -= 0.012;
     g.add(outline);
-    var ribGeo = new THREE.ExtrudeGeometry(ribShape(c.len, 0.035 * c.wid + 0.02), {
+    var rib = new THREE.Mesh(new THREE.ExtrudeGeometry(ribShape(c.len, 0.035 * c.wid + 0.02), {
       depth: 0.05, bevelEnabled: false, steps: 1
-    });
-    var rib = new THREE.Mesh(ribGeo, ribMat);
+    }), ribMat);
     rib.position.z = BLADE_DEPTH + 0.02;
     g.add(rib);
-    g.rotation.z = ang;
+    g.rotation.z = c.ang;
     g.rotation.x = -c.back;
-    g.position.set(Math.sin(ang) * 0.12, Math.cos(ang) * 0.12 - 0.05, 0);
+    g.position.set(Math.sin(c.ang) * 0.12, Math.cos(c.ang) * 0.12 - 0.05, 0);
     leaf.add(g);
   });
 
-  var stem = new THREE.Mesh(
-    new THREE.CylinderGeometry(0.09, 0.10, 1.5, 14),
-    new THREE.MeshStandardMaterial({ color: 0x6b7a2f, roughness: 0.85, metalness: 0.05, envMapIntensity: 0.15 })
-  );
-  stem.position.set(0, -0.72, 0);
-  stem.rotation.z = 0.06;
-  leaf.add(stem);
-
-  var shades = new THREE.Group();
-  function wayfarer(w, h, r, topExtra) {
-    var s = new THREE.Shape();
-    var half = w / 2, top = w / 2 + topExtra, hb = -h / 2, ht = h / 2;
-    s.moveTo(-half + r, hb);
-    s.lineTo(half - r, hb);
-    s.quadraticCurveTo(half, hb, half, hb + r);
-    s.lineTo(top, ht - r);
-    s.quadraticCurveTo(top, ht, top - r, ht);
-    s.lineTo(-top + r, ht);
-    s.quadraticCurveTo(-top, ht, -top, ht - r);
-    s.lineTo(-half, hb + r);
-    s.quadraticCurveTo(-half, hb, -half + r, hb);
+  leaf.add((function () {
+    var s = new THREE.Mesh(new THREE.CylinderGeometry(0.09, 0.10, 1.5, 14), stemMat);
+    s.position.set(0, -0.72, 0);
+    s.rotation.z = 0.06;
     return s;
-  }
-  var frameMat = new THREE.MeshStandardMaterial({
-    color: 0x0b0b0c, roughness: 0.32, metalness: 0.25, envMapIntensity: 0.6
-  });
-  var lensMat = new THREE.MeshStandardMaterial({
-    color: 0x08201c, roughness: 0.05, metalness: 1.0,
-    envMapIntensity: 1.6, transparent: true, opacity: 0.62,
-    emissive: 0x08241f, emissiveIntensity: 0.35
-  });
-  var goldMat = new THREE.MeshStandardMaterial({
-    color: 0xe8c547, roughness: 0.28, metalness: 1.0, envMapIntensity: 1.2
-  });
-  var lensShape = wayfarer(1.02, 0.66, 0.15, 0.13);
-  var frameShape = wayfarer(1.2, 0.82, 0.17, 0.15);
-  [-0.62, 0.62].forEach(function (cx) {
-    var frame = new THREE.Mesh(
-      new THREE.ExtrudeGeometry(frameShape, { depth: 0.12, bevelEnabled: true, bevelThickness: 0.02, bevelSize: 0.02, bevelSegments: 1 }),
-      frameMat
-    );
-    frame.position.set(cx, 0, -0.06);
-    shades.add(frame);
-    var lens = new THREE.Mesh(
-      new THREE.ExtrudeGeometry(lensShape, { depth: 0.1, bevelEnabled: true, bevelThickness: 0.02, bevelSize: 0.02, bevelSegments: 1 }),
-      lensMat
-    );
-    lens.position.set(cx, 0, 0.02);
-    shades.add(lens);
-    var streak = new THREE.Mesh(
-      new THREE.PlaneGeometry(1.15, 0.34),
-      new THREE.MeshBasicMaterial({ color: 0xffffff, transparent: true, opacity: 0.16, blending: THREE.AdditiveBlending, depthWrite: false })
-    );
-    streak.position.set(cx - 0.16, 0.13, 0.2);
-    streak.rotation.z = 0.5;
-    shades.add(streak);
-  });
-  var brow = new THREE.Mesh(new THREE.BoxGeometry(2.5, 0.16, 0.18), frameMat);
-  brow.position.set(0, 0.36, 0);
-  shades.add(brow);
-  var bridge = new THREE.Mesh(new THREE.BoxGeometry(0.26, 0.14, 0.16), frameMat);
-  bridge.position.set(0, 0.12, 0.02);
-  shades.add(bridge);
-  [-1.16, 1.16].forEach(function (rx) {
-    var rivet = new THREE.Mesh(new THREE.SphereGeometry(0.04, 16, 16), goldMat);
-    rivet.position.set(rx, 0.02, 0.08);
-    shades.add(rivet);
-  });
-  [-1, 1].forEach(function (sgn) {
-    var arm = new THREE.Mesh(new THREE.BoxGeometry(0.08, 0.14, 1.25), frameMat);
-    arm.position.set(sgn * 1.14, 0.18, -0.62);
-    arm.rotation.y = sgn * 0.14;
-    arm.rotation.x = 0.06;
-    shades.add(arm);
-  });
-  shades.scale.setScalar(0.92);
-  shades.position.set(0, 1.2, 0.52);
-  shades.rotation.x = -0.06;
-  leaf.add(shades);
+  })());
 
+  (function shadesOn(parent) {
+    var shades = new THREE.Group();
+    function wayfarer(w, h, r, topExtra) {
+      var s = new THREE.Shape();
+      var half = w / 2, top = w / 2 + topExtra, hb = -h / 2, ht = h / 2;
+      s.moveTo(-half + r, hb);
+      s.lineTo(half - r, hb);
+      s.quadraticCurveTo(half, hb, half, hb + r);
+      s.lineTo(top, ht - r);
+      s.quadraticCurveTo(top, ht, top - r, ht);
+      s.lineTo(-top + r, ht);
+      s.quadraticCurveTo(-top, ht, -top, ht - r);
+      s.lineTo(-half, hb + r);
+      s.quadraticCurveTo(-half, hb, -half + r, hb);
+      return s;
+    }
+    var lensShape = wayfarer(1.02, 0.66, 0.15, 0.13);
+    var frameShape = wayfarer(1.2, 0.82, 0.17, 0.15);
+    [-0.62, 0.62].forEach(function (cx) {
+      var f = new THREE.Mesh(new THREE.ExtrudeGeometry(frameShape, {
+        depth: 0.12, bevelEnabled: true, bevelThickness: 0.02, bevelSize: 0.02, bevelSegments: 1
+      }), frameMat);
+      f.position.set(cx, 0, -0.06);
+      shades.add(f);
+      var l = new THREE.Mesh(new THREE.ExtrudeGeometry(lensShape, {
+        depth: 0.1, bevelEnabled: true, bevelThickness: 0.02, bevelSize: 0.02, bevelSegments: 1
+      }), lensMat);
+      l.position.set(cx, 0, 0.02);
+      shades.add(l);
+    });
+    var brow = new THREE.Mesh(new THREE.BoxGeometry(2.5, 0.16, 0.18), frameMat);
+    brow.position.set(0, 0.36, 0);
+    shades.add(brow);
+    var bridge = new THREE.Mesh(new THREE.BoxGeometry(0.26, 0.14, 0.16), frameMat);
+    bridge.position.set(0, 0.12, 0.02);
+    shades.add(bridge);
+    [-1.16, 1.16].forEach(function (rx) {
+      var rivet = new THREE.Mesh(new THREE.SphereGeometry(0.04, 12, 10), goldMat);
+      rivet.position.set(rx, 0.02, 0.08);
+      shades.add(rivet);
+    });
+    [-1, 1].forEach(function (sgn) {
+      var arm = new THREE.Mesh(new THREE.BoxGeometry(0.08, 0.14, 1.25), frameMat);
+      arm.position.set(sgn * 1.14, 0.18, -0.62);
+      arm.rotation.y = sgn * 0.14;
+      arm.rotation.x = 0.06;
+      shades.add(arm);
+    });
+    shades.scale.setScalar(0.92);
+    shades.position.set(0, 1.2, 0.52);
+    shades.rotation.x = -0.06;
+    parent.add(shades);
+  })(leaf);
+
+  leaf.rotation.z = 0.04;
+  leaf.position.y = -1.02;
+
+  var leafPivot = new THREE.Group();
+  leafPivot.scale.setScalar(0.125);
+  leafPivot.position.z = 0.0;
+  leafPivot.add(leaf);
+  well.add(leafPivot);
+
+  /* ---- painel escuro do teclado ---- */
+  var PAD_W = 1.70, PAD_H = 1.76, PAD_CX = 1.10;
+  var pad = new THREE.Group();
+  pad.position.set(PAD_CX, 0, PLATE_T / 2 + 0.001);
+  face.add(pad);
+
+  pad.add(new THREE.Mesh(roundedBox(PAD_W, PAD_H, 0.05, 0.02), padMat));
+
+  var keyBodies = [], keyGroups = {}, labels = [];
+  var PAD_FRONT = 0.025;
+
+  function labelCanvas(text, big, ink) {
+    var c = document.createElement("canvas");
+    c.width = 256; c.height = big ? 96 : 256;
+    var x = c.getContext("2d");
+    x.textAlign = "center";
+    x.textBaseline = "middle";
+    x.fillStyle = ink;
+    x.font = big
+      ? "600 " + (text.length > 7 ? 38 : 44) + "px 'IBM Plex Sans', system-ui, sans-serif"
+      : "500 158px 'IBM Plex Sans', system-ui, sans-serif";
+    x.fillText(text, c.width / 2, c.height / 2 + (big ? 0 : 4));
+    return c;
+  }
+
+  function addKey(id, text, kx, ky, kw, kh, mat, big, ink) {
+    var g = new THREE.Group();
+    g.position.set(kx, ky, PAD_FRONT);
+    g.userData.z0 = PAD_FRONT;
+
+    var b = new THREE.Mesh(roundedBox(kw, kh, 0.07, 0.018), mat);
+    b.position.z = 0.035;
+    b.userData.key = id;
+    g.add(b);
+    keyBodies.push(b);
+
+    var tex = new THREE.CanvasTexture(labelCanvas(text, big, ink));
+    tex.anisotropy = renderer.capabilities.getMaxAnisotropy();
+    labels.push({ tex: tex, text: text, big: big, ink: ink });
+    var lw = big ? kw * 0.86 : kh * 0.72;
+    var lh = big ? kw * 0.86 * 0.375 : kh * 0.72;
+    var label = new THREE.Mesh(new THREE.PlaneGeometry(lw, lh),
+      new THREE.MeshBasicMaterial({ map: tex, transparent: true }));
+    label.position.z = 0.0715;
+    g.add(label);
+
+    if (id === "5") {
+      var nub = new THREE.Mesh(new THREE.SphereGeometry(0.016, 10, 8), mat);
+      nub.position.set(0, -kh * 0.3, 0.072);
+      nub.scale.z = 0.5;
+      g.add(nub);
+    }
+
+    pad.add(g);
+    keyGroups[id] = g;
+  }
+
+  var KCOL = [-0.31, 0, 0.31], KROW = [0.36, 0.05, -0.26], KSIZE = 0.27;
+  ["1", "2", "3", "4", "5", "6", "7", "8", "9"].forEach(function (n, i) {
+    addKey(n, n, KCOL[i % 3], KROW[Math.floor(i / 3)], KSIZE, KSIZE, keyMat, false, URNA.digitInk);
+  });
+  addKey("0", "0", KCOL[1], -0.57, KSIZE, KSIZE, keyMat, false, URNA.digitInk);
+
+  addKey("BRANCO", "BRANCO", -0.45, -0.79, 0.42, 0.14, keyBrancoMat, true, URNA.darkInk);
+  addKey("CORRIGE", "CORRIGE", 0.00, -0.79, 0.42, 0.14, keyCorrigeMat, true, "#ffffff");
+  addKey("CONFIRMA", "CONFIRMA", 0.45, -0.79, 0.42, 0.14, keyConfirmaMat, true, "#ffffff");
+
+  /* ---- desenho da tela ---- */
+  function drawScreen() {
+    var full = digits.length === 5;
+    sx.globalCompositeOperation = "source-over";
+    sx.fillStyle = "#" + URNA.screenBg.getHexString();
+    sx.fillRect(0, 0, SC_W, SC_H);
+
+    if (fim) {
+      sx.fillStyle = URNA.screenInk;
+      sx.textAlign = "center";
+      sx.textBaseline = "middle";
+      sx.font = "600 215px 'IBM Plex Sans', system-ui, sans-serif";
+      sx.fillText("FIM", SC_W / 2, SC_H / 2 - 24);
+      sx.font = "400 34px 'IBM Plex Sans', system-ui, sans-serif";
+      sx.fillStyle = URNA.screenGrey;
+      sx.fillText("voto registrado", SC_W / 2, SC_H / 2 + 128);
+      sx.textAlign = "left";
+      sx.textBaseline = "alphabetic";
+      well.visible = false;
+      scTex.needsUpdate = true;
+      return;
+    }
+
+    var pad2 = 46;
+    sx.textAlign = "left";
+    sx.textBaseline = "alphabetic";
+
+    sx.fillStyle = URNA.screenGrey;
+    sx.font = "400 27px 'IBM Plex Sans', system-ui, sans-serif";
+    sx.fillText("SEU VOTO PARA", pad2, 56);
+    sx.fillStyle = URNA.screenInk;
+    sx.font = "600 54px 'IBM Plex Sans', system-ui, sans-serif";
+    sx.fillText(CARGO, pad2, 116);
+
+    sx.fillStyle = URNA.screenGrey;
+    sx.font = "400 27px 'IBM Plex Sans', system-ui, sans-serif";
+    sx.fillText("Numero:", pad2, 236);
+    var bw = 50, bh = 62, gap = 9, bx = pad2 + 142, by = 190;
+    for (var i = 0; i < 5; i++) {
+      var x0 = bx + i * (bw + gap);
+      sx.strokeStyle = URNA.screenRule;
+      sx.lineWidth = 2;
+      sx.strokeRect(x0 + 1, by + 1, bw - 2, bh - 2);
+      if (digits[i]) {
+        sx.fillStyle = URNA.screenInk;
+        sx.font = "500 46px 'IBM Plex Mono', ui-monospace, monospace";
+        sx.textAlign = "center";
+        sx.fillText(digits[i], x0 + bw / 2, by + 47);
+        sx.textAlign = "left";
+      }
+    }
+
+    sx.fillStyle = URNA.screenGrey;
+    sx.font = "400 27px 'IBM Plex Sans', system-ui, sans-serif";
+    sx.fillText("Nome:", pad2, 336);
+    sx.fillText("Partido:", pad2, 402);
+    sx.fillStyle = full ? URNA.screenInk : URNA.screenRule;
+    sx.font = "600 30px 'IBM Plex Sans', system-ui, sans-serif";
+    sx.fillText(full ? NOME : "-", pad2 + 126, 336);
+    sx.fillText(full ? PARTIDO : "-", pad2 + 126, 402);
+
+    var px = PHOTO.x0 * SC_W, py = PHOTO.y0 * SC_H;
+    var pw = (PHOTO.x1 - PHOTO.x0) * SC_W, ph = (PHOTO.y1 - PHOTO.y0) * SC_H;
+    if (full) {
+      sx.clearRect(px, py, pw, ph);
+    } else {
+      sx.fillStyle = "#" + URNA.well.getHexString();
+      sx.fillRect(px, py, pw, ph);
+      sx.fillStyle = URNA.screenRule;
+      sx.textAlign = "center";
+      sx.font = "400 25px 'IBM Plex Sans', system-ui, sans-serif";
+      sx.fillText("sem foto", px + pw / 2, py + ph / 2);
+      sx.textAlign = "left";
+    }
+    sx.strokeStyle = URNA.screenRule;
+    sx.lineWidth = 2;
+    sx.strokeRect(px + 1, py + 1, pw - 2, ph - 2);
+    well.visible = full;
+
+    sx.strokeStyle = URNA.screenRule;
+    sx.lineWidth = 2;
+    sx.beginPath(); sx.moveTo(pad2, 612); sx.lineTo(SC_W - pad2, 612); sx.stroke();
+    sx.fillStyle = URNA.screenGrey;
+    sx.font = "400 24px 'IBM Plex Sans', system-ui, sans-serif";
+    sx.fillText("Aperte a tecla:", pad2, 656);
+    sx.fillStyle = URNA.screenInk;
+    sx.fillText("VERDE para CONFIRMAR", pad2, 692);
+    sx.fillText("LARANJA para CORRIGIR", pad2, 726);
+
+    scTex.needsUpdate = true;
+  }
+
+  /* ---- sombra de contato ---- */
+  var shadowMat;
   (function () {
     var c = document.createElement("canvas");
     c.width = c.height = 256;
     var x = c.getContext("2d");
     var rg = x.createRadialGradient(128, 128, 0, 128, 128, 128);
-    rg.addColorStop(0, "rgba(0,0,0,0.24)");
+    rg.addColorStop(0, "rgba(0,0,0,0.55)");
     rg.addColorStop(1, "rgba(0,0,0,0)");
     x.fillStyle = rg; x.fillRect(0, 0, 256, 256);
-    var shadow = new THREE.Mesh(
-      new THREE.PlaneGeometry(9, 4.6),
-      new THREE.MeshBasicMaterial({ map: new THREE.CanvasTexture(c), transparent: true, opacity: 0.7, depthWrite: false })
-    );
-    shadow.rotation.x = -Math.PI / 2;
-    shadow.position.set(0, -1.35, 0);
-    scene.add(shadow);
+    shadowMat = new THREE.MeshBasicMaterial({
+      map: new THREE.CanvasTexture(c), transparent: true, depthWrite: false, opacity: 0.3
+    });
+    var sh = new THREE.Mesh(new THREE.PlaneGeometry(7.8, 6.2), shadowMat);
+    sh.rotation.x = -Math.PI / 2;
+    sh.position.set(0, 0.004, 0.1);
+    scene.add(sh);
   })();
 
-  leaf.rotation.z = 0.04;
-  leaf.scale.setScalar(0.95);
+  /* ---- o que muda com o tema: luz, ambiente e a folha ---- */
+  repaint = function () {
+    pal = palette();
+    bladeMats.forEach(function (m) { m.color.copy(pal.blade(m.userData.ring)).convertSRGBToLinear(); });
+    outlineMat.color.copy(pal.outline).convertSRGBToLinear();
+    ribMat.color.copy(pal.rib).convertSRGBToLinear();
+    stemMat.color.copy(pal.stem).convertSRGBToLinear();
+    frameMat.color.copy(pal.frame).convertSRGBToLinear();
+    lensMat.color.copy(pal.lens).convertSRGBToLinear();
+    lensMat.emissive.copy(pal.lens).convertSRGBToLinear();
+    goldMat.color.copy(pal.gold).convertSRGBToLinear();
 
-  var BASE_X = -0.15;
+    hemi.color.copy(pal.hemiSky); hemi.groundColor.copy(pal.hemiGround); hemi.intensity = pal.hemiInt;
+    keyLight.color.copy(pal.keyColor); keyLight.intensity = pal.keyInt;
+    rimLight.color.copy(pal.rimColor); rimLight.intensity = pal.rimInt;
+    fillLight.color.copy(pal.fillColor); fillLight.intensity = pal.fillInt;
+    wellLight.intensity = pal.wellInt;
+
+    renderer.toneMappingExposure = pal.exposure;
+    shadowMat.opacity = pal.shadow;
+    buildEnv();
+    drawScreen();
+  };
+
+  if (document.fonts && document.fonts.ready) {
+    document.fonts.ready.then(function () {
+      labels.forEach(function (l) {
+        l.tex.image = labelCanvas(l.text, l.big, l.ink);
+        l.tex.needsUpdate = true;
+      });
+      drawScreen();
+    });
+  }
+
+  /* ---- teclas e enquadramento ---- */
   var autoSpin = !REDUCED;
+  var BASE_Y = 0.40, BASE_X = 0.02;
+  var targetY = BASE_Y, targetX = BASE_X, curY = BASE_Y, curX = BASE_X;
+  var pressed = [];
+
+  function press(id) {
+    var g = keyGroups[id];
+    if (g) { g.position.z = g.userData.z0 - 0.028; pressed.push({ g: g, until: performance.now() + 130 }); }
+
+    if (fim) { fim = false; digits = []; }
+    if (isDigit(id)) {
+      if (digits.length < 5) digits.push(id);
+    } else if (id === "CORRIGE" || id === "BRANCO") {
+      digits = [];
+    } else if (id === "CONFIRMA") {
+      if (digits.length === 5) { fim = true; fimAt = performance.now(); }
+    }
+    drawScreen();
+  }
+
+  var ray = new THREE.Raycaster();
+  var ndc = new THREE.Vector2();
+  var downAt = null, downKey = null;
   var dragging = false, lastX = 0, lastY = 0;
-  var targetY = REDUCED ? 0 : -0.55, targetX = BASE_X;
-  var curY = REDUCED ? 0 : -0.55, curX = BASE_X;
+
+  function hitKey(ev) {
+    var r = canvas.getBoundingClientRect();
+    ndc.set(((ev.clientX - r.left) / r.width) * 2 - 1, -((ev.clientY - r.top) / r.height) * 2 + 1);
+    ray.setFromCamera(ndc, camera);
+    var hits = ray.intersectObjects(keyBodies, false);
+    return hits.length ? hits[0].object.userData.key : null;
+  }
 
   canvas.addEventListener("pointerdown", function (e) {
     dragging = true; lastX = e.clientX; lastY = e.clientY;
+    downAt = { x: e.clientX, y: e.clientY };
+    downKey = hitKey(e);
     canvas.setPointerCapture(e.pointerId);
   });
   canvas.addEventListener("pointermove", function (e) {
     if (!dragging) return;
-    targetY += (e.clientX - lastX) * 0.008;
-    targetX += (e.clientY - lastY) * 0.008;
-    targetX = Math.max(-0.9, Math.min(0.9, targetX));
+    targetY = Math.max(-0.35, Math.min(1.05, targetY + (e.clientX - lastX) * 0.006));
+    targetX = Math.max(-0.28, Math.min(0.4, targetX + (e.clientY - lastY) * 0.005));
     lastX = e.clientX; lastY = e.clientY;
   });
   function endDrag(e) {
     dragging = false;
     if (e.pointerId != null && canvas.hasPointerCapture(e.pointerId)) canvas.releasePointerCapture(e.pointerId);
+    if (downKey && downAt &&
+        Math.abs(e.clientX - downAt.x) < 6 && Math.abs(e.clientY - downAt.y) < 6) press(downKey);
+    downKey = null; downAt = null;
   }
   canvas.addEventListener("pointerup", endDrag);
   canvas.addEventListener("pointercancel", endDrag);
 
+  canvas.addEventListener("keydown", function (e) {
+    if (isDigit(e.key)) { e.preventDefault(); press(e.key); return; }
+    if (e.key === "Enter") { e.preventDefault(); press("CONFIRMA"); return; }
+    if (e.key === "Backspace") { e.preventDefault(); press("CORRIGE"); return; }
+    var k = { ArrowLeft: [-0.12, 0], ArrowRight: [0.12, 0], ArrowUp: [0, -0.08], ArrowDown: [0, 0.08] }[e.key];
+    if (!k) return;
+    e.preventDefault();
+    targetY = Math.max(-0.35, Math.min(1.05, targetY + k[0]));
+    targetX = Math.max(-0.28, Math.min(0.4, targetX + k[1]));
+  });
+
+  /* ---- laco ---- */
+  var onScreen = true;
+  if (window.IntersectionObserver) {
+    new IntersectionObserver(function (es) { onScreen = es[0].isIntersecting; }).observe(host);
+  }
+
   var clock = new THREE.Clock();
-  function frame() {
-    var t = clock.getElapsedTime();
-    if (autoSpin && !dragging) targetY += 0.004;
+
+  function frame(now) {
+    requestAnimationFrame(frame);
+    if (document.hidden || !onScreen) { clock.getDelta(); return; }
+
+    var dt = clock.getDelta() || 0.016;
+    var t = clock.elapsedTime;
+
+    for (var i = pressed.length - 1; i >= 0; i--) {
+      if (now >= pressed[i].until) {
+        pressed[i].g.position.z = pressed[i].g.userData.z0;
+        pressed.splice(i, 1);
+      }
+    }
+    if (fim && now - fimAt > 2600) { fim = false; drawScreen(); }
+
+    if (autoSpin && !REDUCED) {
+      leaf.rotation.y += 0.007;
+      leafPivot.position.y = Math.sin(t * 0.7) * 0.03;
+      leafPivot.position.z = Math.sin(t * 0.43) * 0.055;
+      leafPivot.rotation.z = Math.sin(t * 0.5) * 0.07;
+    }
+
     curY += (targetY - curY) * 0.08;
     curX += (targetX - curX) * 0.08;
-    leaf.rotation.y = curY;
-    leaf.rotation.x = curX + (autoSpin && !REDUCED ? Math.sin(t * 0.6) * 0.05 : 0);
-    renderer.render(scene, camera);
-    requestAnimationFrame(frame);
-  }
-  frame();
+    urna.rotation.y = curY;
+    urna.rotation.x = curX;
 
-  window.addEventListener("resize", function () {
+    renderer.render(scene, camera);
+  }
+
+  function resize() {
     var n = dims();
     camera.aspect = n.w / n.h;
+    frameCamera();
     camera.updateProjectionMatrix();
     renderer.setSize(n.w, n.h, false);
-  });
+  }
+  if (window.ResizeObserver) new ResizeObserver(resize).observe(host);
+  else window.addEventListener("resize", resize);
+
+  repaint();
+  if (window.MutationObserver) {
+    new MutationObserver(function () { if (repaint) repaint(); })
+      .observe(root, { attributes: true, attributeFilter: ["data-theme"] });
+  }
+  mq.addEventListener("change", function () { if (repaint) repaint(); });
+  requestAnimationFrame(frame);
 })();
 </script>
 </body></html>
